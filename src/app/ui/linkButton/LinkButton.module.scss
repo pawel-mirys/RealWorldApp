@@ -1,5 +1,7 @@
+@import '/src/variables.scss';
+
 .linkButton {
-  color: #1565c0;
+  color: $primary;
   text-decoration: none;
   height: 100%;
 }

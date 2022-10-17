@@ -7,7 +7,7 @@ export const SignIn = () => {
     <div className={styles.pageContainer}>
       <h2>Sign In</h2>
       <div>
-        <LinkButton className={styles.link} to="/signIn">
+        <LinkButton className={styles.link} to="/signUp">
           Need an account?
         </LinkButton>
       </div>
