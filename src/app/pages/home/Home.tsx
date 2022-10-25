@@ -1,5 +1,7 @@
 import AbcRounded from '@mui/icons-material/AbcRounded';
 import { Button } from '@mui/material';
+
+import { ArticleList } from 'app/components/articleList/ArticleList';
 import styles from './Home.module.scss';
 
 export const Home = () => {
@@ -14,7 +16,7 @@ export const Home = () => {
           <div className={styles.feedHeader}>
             <Button>Global Feed</Button>
           </div>
-          <div className={styles.articlesList}></div>
+          <div className={styles.articlesList}>{<ArticleList />}</div>
         </div>
         <div className={styles.tags}>
           <p>Popular tags:</p>
