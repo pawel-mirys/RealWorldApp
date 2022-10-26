@@ -6,7 +6,7 @@ type ContextProps = {
 };
 
 type AuthorData = {
-  userName: string;
+  username: string;
   bio: string | null;
   image: string;
   following: boolean;
@@ -21,7 +21,7 @@ type ArticleData = {
   createdAt: string;
   updatedAt: string;
   favourtied: boolean;
-  favouritesCount: number;
+  favoritesCount: number;
   author: AuthorData;
 };
 
@@ -43,7 +43,7 @@ export const useArticleContext = () => {
 
 export const ArticleContextProvider = ({ children }: ContextProps) => {
   const [author, setAuthor] = useState<AuthorData>({
-    userName: '',
+    username: '',
     bio: '',
     image: '',
     following: false,
@@ -57,7 +57,7 @@ export const ArticleContextProvider = ({ children }: ContextProps) => {
     createdAt: '',
     updatedAt: '',
     favourtied: false,
-    favouritesCount: 0,
+    favoritesCount: 0,
     author: author,
   });
   const [articleList, setArticleList] = useState<FetchedData['articles']>([]);

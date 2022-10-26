@@ -1,0 +1,13 @@
+@import '/src/variables.scss';
+.tag {
+    margin: 0px 5px;
+    font-weight: 700;
+}
+
+.articleTag {
+    color: $primary;
+    border: 1px solid $primary;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 5px;
+}

@@ -8,9 +8,9 @@ export const ArticleList = () => {
       <div className={styles.listItem} key={index}>
         <Article
           avatar={item.author.image}
-          userName={item.author.userName}
+          userName={item.author.username}
           createdAt={item.createdAt}
-          likesCount={item.favouritesCount}
+          likesCount={item.favoritesCount}
           title={item.title}
           description={item.description}
           taglist={item.tagList}

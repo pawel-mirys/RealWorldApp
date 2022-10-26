@@ -1,5 +1,6 @@
 import { LinkButton } from 'app/ui/linkButton/LinkButton';
-import { Author, AuthorProps } from '../author/Author';
+import { Author } from '../author/Author';
+import { Tag } from '../tag/Tag';
 import styles from './Article.module.scss';
 
 type ArticleProps = {
@@ -9,13 +10,10 @@ type ArticleProps = {
   avatar: string;
   userName: string;
   createdAt: string;
-  likesCount: string;
+  likesCount: number;
 };
 
-export const Article = (
-  { avatar, userName, createdAt, likesCount, title, description, taglist }: ArticleProps,
-  props: AuthorProps,
-) => {
+export const Article = ({ avatar, userName, createdAt, likesCount, title, description, taglist }: ArticleProps) => {
   return (
     <div className={styles.articleContainer}>
       <Author avatar={avatar} userName={userName} createdAt={createdAt} likesCount={likesCount} />
@@ -26,11 +24,13 @@ export const Article = (
           Read more...
         </LinkButton>
         <div className={styles.tagList}>
-          <ul>
-            {taglist.map((item, index) => {
-              return <li key={index}>{item}</li>;
-            })}
-          </ul>
+          {taglist.map((item, index) => {
+            return (
+              <div className={styles.tagContainer} key={index}>
+                <Tag variant="articleTag">{item}</Tag>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
