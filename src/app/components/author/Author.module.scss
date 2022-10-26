@@ -1,0 +1,12 @@
+@import '/src/variables.scss';
+.author {
+    @include flex(space-between, center, row);
+}
+
+.infoContainer {
+    @include flex(center, center, row);
+}
+
+.info {
+    margin-left: 10px;
+}
