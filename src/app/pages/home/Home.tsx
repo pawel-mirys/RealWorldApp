@@ -7,7 +7,7 @@ import styles from './Home.module.scss';
 
 export const Home = () => {
   return (
-    <div className={styles.pageContainer}>
+    <main className={styles.pageContainer}>
       <div className={styles.header}>
         <AbcRounded sx={{ fontSize: 150 }} className={styles.logo} />
         <p className={styles.motto}>A place to share your knowledge.</p>
@@ -21,6 +21,6 @@ export const Home = () => {
         </div>
         <PopularTags />
       </div>
-    </div>
+    </main>
   );
 };

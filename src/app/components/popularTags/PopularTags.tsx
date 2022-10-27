@@ -1,5 +1,5 @@
 import { useApiContext } from 'app/contexts/ApiContext';
-import { Tag } from '../tag/Tag';
+import { Tag } from '../../ui/tag/Tag';
 import styles from './PopularTags.module.scss';
 
 export const PopularTags = () => {
