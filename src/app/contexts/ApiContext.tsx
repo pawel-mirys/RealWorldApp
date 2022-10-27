@@ -30,18 +30,18 @@ type FetchedData = {
   articlesCount: number;
 };
 
-export const ArticleContext = createContext<{
+export const ApiContext = createContext<{
   article: ArticleData;
   author: AuthorData;
   articleList: FetchedData['articles'];
 } | null>(null);
 
-export const useArticleContext = () => {
-  const context = useContext(ArticleContext);
+export const useApiContext = () => {
+  const context = useContext(ApiContext);
   return context;
 };
 
-export const ArticleContextProvider = ({ children }: ContextProps) => {
+export const ApiProvider = ({ children }: ContextProps) => {
   const [author, setAuthor] = useState<AuthorData>({
     username: '',
     bio: '',
@@ -75,7 +75,7 @@ export const ArticleContextProvider = ({ children }: ContextProps) => {
   }, [articleList]);
 
   return (
-    <ArticleContext.Provider
+    <ApiContext.Provider
       value={{
         article,
         author,
@@ -83,6 +83,6 @@ export const ArticleContextProvider = ({ children }: ContextProps) => {
       }}
     >
       {children}
-    </ArticleContext.Provider>
+    </ApiContext.Provider>
   );
 };

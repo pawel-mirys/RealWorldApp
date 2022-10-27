@@ -1,8 +1,8 @@
 import styles from './ArticleList.module.scss';
-import { useArticleContext } from 'app/contexts/ArticleContext';
+import { useApiContext } from 'app/contexts/ApiContext';
 import { Article } from '../article/Article';
 export const ArticleList = () => {
-  const context = useArticleContext();
+  const context = useApiContext();
   let listItem = context?.articleList.map((item, index) => {
     return (
       <div className={styles.listItem} key={index}>

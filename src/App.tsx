@@ -4,17 +4,17 @@ import { HashRouter } from 'react-router-dom';
 import { Navbar } from 'app/components/navbar/Navbar';
 import './App.scss';
 import { RouterSwitch } from 'app/router/RouterSwitch';
-import { ArticleContextProvider } from 'app/contexts/ArticleContext';
+import { ApiProvider } from 'app/contexts/ApiContext';
 
 function App() {
   return (
     <div className="App">
-      <ArticleContextProvider>
+      <ApiProvider>
         <HashRouter>
           <Navbar />
           <RouterSwitch />
         </HashRouter>
-      </ArticleContextProvider>
+      </ApiProvider>
     </div>
   );
 }
