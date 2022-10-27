@@ -9,6 +9,11 @@ type TagProps = {
 
 export const Tag = ({ children, variant }: TagProps) => {
   return (
-    <div className={clsx(styles.tag, variant === 'articleTag' ? styles.articleTag : styles.popularTag)}>{children}</div>
+    <div
+      onClick={() => {}}
+      className={clsx(styles.tag, variant === 'articleTag' ? styles.articleTag : styles.popularTag)}
+    >
+      {children}
+    </div>
   );
 };

@@ -1,6 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
+export const useApiContext = () => {
+  const context = useContext(ApiContext);
+  return context;
+};
+
 type ContextProps = {
   children: JSX.Element | React.ReactElement;
 };
@@ -28,18 +33,15 @@ type ArticleData = {
 type FetchedData = {
   articles: ArticleData[];
   articlesCount: number;
+  tags: string[];
 };
 
-export const ApiContext = createContext<{
+const ApiContext = createContext<{
   article: ArticleData;
   author: AuthorData;
   articleList: FetchedData['articles'];
+  popularTags: FetchedData['tags'];
 } | null>(null);
-
-export const useApiContext = () => {
-  const context = useContext(ApiContext);
-  return context;
-};
 
 export const ApiProvider = ({ children }: ContextProps) => {
   const [author, setAuthor] = useState<AuthorData>({
@@ -61,18 +63,23 @@ export const ApiProvider = ({ children }: ContextProps) => {
     author: author,
   });
   const [articleList, setArticleList] = useState<FetchedData['articles']>([]);
+  const [popularTags, setPopularTags] = useState<string[]>([]);
 
   useEffect(() => {
     (async () => {
       await axios.get<FetchedData>('https://api.realworld.io/api/articles').then((response) => {
-        setArticleList(response.data.articles);
+        setArticleList((prev) => (prev = response.data.articles));
       });
     })();
   }, []);
 
   useEffect(() => {
-    console.log(articleList);
-  }, [articleList]);
+    (async () => {
+      await axios.get<FetchedData>('https://api.realworld.io/api/tags').then((response) => {
+        setPopularTags((prev) => (prev = response.data.tags));
+      });
+    })();
+  }, []);
 
   return (
     <ApiContext.Provider
@@ -80,6 +87,7 @@ export const ApiProvider = ({ children }: ContextProps) => {
         article,
         author,
         articleList,
+        popularTags,
       }}
     >
       {children}

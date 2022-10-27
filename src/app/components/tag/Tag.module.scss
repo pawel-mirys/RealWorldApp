@@ -1,13 +1,30 @@
 @import '/src/variables.scss';
 .tag {
-    margin: 0px 5px;
     font-weight: 700;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 4px;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .articleTag {
     color: $primary;
     border: 1px solid $primary;
-    padding: 4px;
-    font-size: 12px;
-    border-radius: 5px;
+    transition: 0.1s ease-in;
+    margin: 0px 5px;
+    &:hover {
+        color: $white;
+        background-color: $primary;
+    }
+}
+
+.popularTag {
+    color: $black;
+    border: 1px solid $black;
+    &:hover {
+        color: $white;
+        background-color: $black;
+    }
 }

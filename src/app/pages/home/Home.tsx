@@ -2,6 +2,7 @@ import AbcRounded from '@mui/icons-material/AbcRounded';
 import { Button } from '@mui/material';
 
 import { ArticleList } from 'app/components/articleList/ArticleList';
+import { PopularTags } from 'app/components/popularTags/PopularTags';
 import styles from './Home.module.scss';
 
 export const Home = () => {
@@ -18,10 +19,7 @@ export const Home = () => {
           </div>
           <div className={styles.articlesList}>{<ArticleList />}</div>
         </div>
-        <div className={styles.tags}>
-          <p>Popular tags:</p>
-          <div className={styles.tagsList}></div>
-        </div>
+        <PopularTags />
       </div>
     </div>
   );
