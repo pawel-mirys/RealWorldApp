@@ -4,6 +4,7 @@
     font-size: 12px;
     border-radius: 5px;
     padding: 4px;
+    transition: 0.1s ease-in;
     &:hover {
         cursor: pointer;
     }
@@ -12,7 +13,6 @@
 .articleTag {
     color: $primary;
     border: 1px solid $primary;
-    transition: 0.1s ease-in;
     margin: 0px 5px;
     &:hover {
         color: $white;
