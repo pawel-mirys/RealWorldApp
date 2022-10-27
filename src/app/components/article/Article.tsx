@@ -1,6 +1,6 @@
 import { LinkButton } from 'app/ui/linkButton/LinkButton';
 import { Author } from '../author/Author';
-import { Tag } from '../tag/Tag';
+import { Tag } from '../../ui/tag/Tag';
 import styles from './Article.module.scss';
 
 type ArticleProps = {

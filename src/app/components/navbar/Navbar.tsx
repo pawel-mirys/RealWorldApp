@@ -6,7 +6,7 @@ import styles from './Navbar.module.scss';
 
 export const Navbar = () => {
   return (
-    <div className={styles.container}>
+    <nav className={styles.container}>
       <LinkButton to="/" className={styles.logo}>
         <AbcRoundedIcon color="primary" sx={{ fontSize: 60 }} />
       </LinkButton>
@@ -21,6 +21,6 @@ export const Navbar = () => {
           <LinkButton to="/signUp">Sign Up</LinkButton>
         </Button>
       </ButtonGroup>
-    </div>
+    </nav>
   );
 };
