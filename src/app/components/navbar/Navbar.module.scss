@@ -1,0 +1,23 @@
+@import '/src/variables.scss';
+
+.container,
+.navigation {
+  @include flex(space-between, center, row);
+}
+
+.container {
+  width: 60%;
+  height: fit-content;
+  margin: auto;
+}
+
+.navigation {
+  width: 19rem;
+}
+
+.logo {
+  @include flex(center, center, row);
+  width: fit-content;
+  height: 100%;
+}
+

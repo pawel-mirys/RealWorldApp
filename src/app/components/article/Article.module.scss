@@ -1,0 +1,14 @@
+@import '/src/variables.scss';
+.articleContainer {
+    border-top: 1px solid $primary;
+    padding: 15px 0px;
+}
+
+.info {
+    margin-top: 20px;
+    @include flex(space-between, center, row);
+}
+
+.tagList {
+    @include flex(center, center, row);
+}

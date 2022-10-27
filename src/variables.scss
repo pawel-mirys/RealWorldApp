@@ -1,0 +1,11 @@
+@mixin flex($justify, $align, $direction) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+$primary: #1565c0;
+$black: #2c2c2c;
+$white: #ebebeb;
+$lightGrey: rgb(202, 202, 202);

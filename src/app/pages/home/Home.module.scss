@@ -1,0 +1,39 @@
+@import '/src/variables.scss';
+.header {
+    @include flex(center, center, column);
+    background-color: $primary;
+    .logo,
+    .motto {
+        color: $white;
+    }
+    .motto {
+        font-size: 24px;
+        margin-top: 0;
+        margin-bottom: 50px;
+    }
+}
+
+.articlesContainer {
+    @include flex(space-between, flex-start, row);
+    width: 60%;
+    margin: 30px auto 0 auto;
+}
+
+.globalFeed {
+    width: 80%;
+}
+
+.tags {
+    background-color: $lightGrey;
+    width: 30%;
+    height: fit-content;
+    margin-left: 30px;
+    padding: 10px;
+    p {
+        margin-top: 0;
+    }
+}
+
+.articleList {
+    border: 1px solid black;
+}
