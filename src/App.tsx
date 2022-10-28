@@ -3,7 +3,7 @@ import { HashRouter } from 'react-router-dom';
 
 import { Navbar } from 'app/components/navbar/Navbar';
 import './App.scss';
-import { RouterSwitch } from 'app/router/RouterSwitch';
+import { RouterSwitch } from 'app/router/Router';
 import { ApiProvider } from 'app/contexts/ApiContext';
 
 function App() {

@@ -2,11 +2,19 @@
 .articleContainer {
     border-top: 1px solid $primary;
     padding: 15px 0px;
+    color: $black;
 }
 
 .info {
     margin-top: 20px;
     @include flex(space-between, center, row);
+}
+
+.title {
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
 }
 
 .tagList {

@@ -1,6 +1,7 @@
 @import '/src/variables.scss';
 .author {
     @include flex(space-between, center, row);
+    color: $black;
 }
 
 .infoContainer {

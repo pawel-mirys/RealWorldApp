@@ -21,26 +21,57 @@ type ArticleData = {
   slug: string;
   title: string;
   description: string;
-  body: string;
   tagList: string[];
   createdAt: string;
-  updatedAt: string;
   favourtied: boolean;
   favoritesCount: number;
   author: AuthorData;
+};
+
+type ArticlePreview = {
+  slug: string;
+  title: string;
+  description: string;
+  tagList: string[];
+  username: string;
+  createdAt: string;
+  image: string;
+};
+
+type CommentData = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  body: string;
+  author: {
+    username: string;
+    bio: string;
+    image: string;
+    following: boolean;
+  };
 };
 
 type FetchedData = {
   articles: ArticleData[];
   articlesCount: number;
   tags: string[];
+  comments: CommentData[];
 };
 
 const ApiContext = createContext<{
-  article: ArticleData;
+  articlepreview: ArticlePreview;
   author: AuthorData;
   articleList: FetchedData['articles'];
   popularTags: FetchedData['tags'];
+  updateArticlePreview: (
+    slug: string,
+    title: string,
+    description: string,
+    tagList: string[],
+    username: string,
+    createdAt: string,
+    image: string,
+  ) => void;
 } | null>(null);
 
 export const ApiProvider = ({ children }: ContextProps) => {
@@ -50,20 +81,18 @@ export const ApiProvider = ({ children }: ContextProps) => {
     image: '',
     following: false,
   });
-  const [article, setArticle] = useState<ArticleData>({
+  const [articlepreview, setArticlePreview] = useState<ArticlePreview>({
     slug: '',
     title: '',
     description: '',
-    body: '',
     tagList: [],
+    username: '',
     createdAt: '',
-    updatedAt: '',
-    favourtied: false,
-    favoritesCount: 0,
-    author: author,
+    image: '',
   });
   const [articleList, setArticleList] = useState<FetchedData['articles']>([]);
-  const [popularTags, setPopularTags] = useState<string[]>([]);
+  const [popularTags, setPopularTags] = useState<FetchedData['tags']>([]);
+  const [comments, setComments] = useState<FetchedData['comments']>([]);
 
   useEffect(() => {
     (async () => {
@@ -81,13 +110,36 @@ export const ApiProvider = ({ children }: ContextProps) => {
     })();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      await axios
+        .get<FetchedData>(`https://api.realworld.io/api/articles/${articlepreview.slug}/comments`)
+        .then((response) => {
+          setComments((prev) => (prev = response.data.comments));
+        });
+    })();
+  }, [articlepreview.slug]);
+
+  //methods
+
+  const updateArticlePreview = (
+    slug: string,
+    title: string,
+    description: string,
+    tagList: string[],
+    username: string,
+    createdAt: string,
+    image: string,
+  ) => {};
+
   return (
     <ApiContext.Provider
       value={{
-        article,
+        articlepreview,
         author,
         articleList,
         popularTags,
+        updateArticlePreview,
       }}
     >
       {children}

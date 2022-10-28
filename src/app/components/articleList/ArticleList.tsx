@@ -11,6 +11,7 @@ export const ArticleList = () => {
           userName={item.author.username}
           createdAt={item.createdAt}
           likesCount={item.favoritesCount}
+          slug={item.slug}
           title={item.title}
           description={item.description}
           taglist={item.tagList}
