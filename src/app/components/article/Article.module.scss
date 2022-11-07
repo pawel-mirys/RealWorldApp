@@ -2,6 +2,7 @@
 .articleContainer {
     border-top: 1px solid $primary;
     padding: 15px 0px;
+    color: $black;
 }
 
 .info {
@@ -9,6 +10,10 @@
     @include flex(space-between, center, row);
 }
 
-.tagList {
-    @include flex(center, center, row);
+.title {
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
 }
+
