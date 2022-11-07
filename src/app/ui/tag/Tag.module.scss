@@ -1,30 +1,36 @@
 @import '/src/variables.scss';
 .tag {
-    font-weight: 700;
-    font-size: 12px;
-    border-radius: 5px;
-    padding: 4px;
-    transition: 0.1s ease-in;
-    &:hover {
-        cursor: pointer;
-    }
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 4px;
+  transition: 0.1s ease-in;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .articleTag {
-    color: $primary;
-    border: 1px solid $primary;
-    margin: 0px 5px;
-    &:hover {
-        color: $white;
-        background-color: $primary;
-    }
+  color: $primary;
+  border: 1px solid $primary;
+  margin: 0px 5px;
+  &:hover {
+    color: $white;
+    background-color: $primary;
+  }
 }
 
 .popularTag {
-    color: $black;
-    border: 1px solid $black;
-    &:hover {
-        color: $white;
-        background-color: $black;
-    }
+  color: $black;
+  border: 1px solid $black;
+  &:hover {
+    color: $white;
+    background-color: $black;
+  }
+}
+.previewTag {
+  color: $grey;
+  &:hover {
+    cursor: default;
+  }
 }

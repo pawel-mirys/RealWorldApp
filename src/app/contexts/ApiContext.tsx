@@ -35,6 +35,7 @@ type ArticlePreview = {
   tagList: string[];
   username: string;
   createdAt: string;
+  favoritesCount: number;
   image: string;
 };
 
@@ -63,6 +64,7 @@ const ApiContext = createContext<{
   author: AuthorData;
   articleList: FetchedData['articles'];
   popularTags: FetchedData['tags'];
+  comments: FetchedData['comments'];
   updateArticlePreview: (
     slug: string,
     title: string,
@@ -71,10 +73,13 @@ const ApiContext = createContext<{
     username: string,
     createdAt: string,
     image: string,
+    favoritesCount: number,
   ) => void;
 } | null>(null);
 
 export const ApiProvider = ({ children }: ContextProps) => {
+  //setters
+
   const [author, setAuthor] = useState<AuthorData>({
     username: '',
     bio: '',
@@ -82,17 +87,20 @@ export const ApiProvider = ({ children }: ContextProps) => {
     following: false,
   });
   const [articlepreview, setArticlePreview] = useState<ArticlePreview>({
-    slug: '',
+    slug: 'default',
     title: '',
     description: '',
     tagList: [],
     username: '',
     createdAt: '',
     image: '',
+    favoritesCount: 0,
   });
   const [articleList, setArticleList] = useState<FetchedData['articles']>([]);
   const [popularTags, setPopularTags] = useState<FetchedData['tags']>([]);
   const [comments, setComments] = useState<FetchedData['comments']>([]);
+
+  //requests
 
   useEffect(() => {
     (async () => {
@@ -130,7 +138,13 @@ export const ApiProvider = ({ children }: ContextProps) => {
     username: string,
     createdAt: string,
     image: string,
-  ) => {};
+    favoritesCount: number,
+  ) => {
+    setArticlePreview(
+      (prev) => (prev = { slug, title, description, tagList, username, createdAt, image, favoritesCount }),
+    );
+    console.log(favoritesCount);
+  };
 
   return (
     <ApiContext.Provider
@@ -139,6 +153,7 @@ export const ApiProvider = ({ children }: ContextProps) => {
         author,
         articleList,
         popularTags,
+        comments,
         updateArticlePreview,
       }}
     >

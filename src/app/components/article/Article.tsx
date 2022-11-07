@@ -5,6 +5,7 @@ import { Author } from '../author/Author';
 import { Tag } from '../../ui/tag/Tag';
 import styles from './Article.module.scss';
 import { useApiContext } from 'app/contexts/ApiContext';
+import { TagsList } from '../tagsList/TagsList';
 
 type ArticleProps = {
   slug: string;
@@ -31,12 +32,11 @@ export const Article = ({
   const navigate = useNavigate();
   return (
     <div className={styles.articleContainer}>
-      <Author avatar={avatar} userName={userName} createdAt={createdAt} likesCount={likesCount} />
+      <Author variant="article" avatar={avatar} userName={userName} createdAt={createdAt} likesCount={likesCount} />
       <h3
         onClick={() => {
-          context?.updateArticlePreview(slug, title, description, taglist, userName, createdAt, avatar);
+          context?.updateArticlePreview(slug, title, description, taglist, userName, createdAt, avatar, likesCount);
           navigate('/preview');
-          console.log(title);
         }}
         className={styles.title}
       >
@@ -47,15 +47,7 @@ export const Article = ({
         <LinkButton className={styles.readMore} to={'/'}>
           Read more...
         </LinkButton>
-        <div className={styles.tagList}>
-          {taglist.map((item, index) => {
-            return (
-              <div className={styles.tagContainer} key={index}>
-                <Tag variant="articleTag">{item}</Tag>
-              </div>
-            );
-          })}
-        </div>
+        <TagsList inputList={taglist} variant="articleTag" />
       </div>
     </div>
   );

@@ -1,0 +1,4 @@
+@import '/src/variables.scss';
+.tagList {
+  @include flex(center, center, row);
+}
