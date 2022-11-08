@@ -2,29 +2,29 @@
 .title,
 .controls,
 .description {
-  width: 60%;
+    width: 60%;
 }
 
 .header {
-  background-color: $black;
-  padding: 20px;
-  color: $white;
-  .title {
-    margin: auto;
-  }
+    background-color: $black;
+    padding: 20px;
+    color: $white;
+    .title {
+        margin: auto;
+    }
 }
 
 .controls {
-  width: 60%;
-  margin: 40px auto 0 auto;
+    margin: 40px auto 0 auto;
 }
 
 .description {
-  @include flex(center, flex-start, column);
-  margin: 30px auto;
-  font-size: 18px;
-  border-bottom: 1px solid $primary;
+    @include flex(center, flex-start, column);
+    margin: 30px auto;
+    font-size: 18px;
+    border-bottom: 1px solid $primary;
 }
+
 .tagList {
-  margin: 20px 0;
+    margin: 20px 0;
 }

@@ -1,0 +1,8 @@
+@import '/src/variables.scss';
+.message {
+    @include flex(center, center, row);
+}
+
+.link {
+    margin: 0 5px;
+}

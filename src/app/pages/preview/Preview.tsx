@@ -1,4 +1,5 @@
 import { Author } from 'app/components/author/Author';
+import { CommentsList } from 'app/components/commentsList/CommentsList';
 import { TagsList } from 'app/components/tagsList/TagsList';
 import { useApiContext } from 'app/contexts/ApiContext';
 import styles from './Preview.module.scss';
@@ -25,11 +26,7 @@ export const Preview = () => {
         <p>{context?.articlepreview.description}</p>
         <TagsList className={styles.tagList} inputList={context?.articlepreview.tagList!} variant="previewTag" />
       </div>
-      <div className={styles.commentsContainer}>
-        <div className={styles.commentsControls}></div>
-        <div className={styles.message}></div>
-        <div className={styles.comments}>{}</div>
-      </div>
+      <CommentsList />
     </div>
   );
 };

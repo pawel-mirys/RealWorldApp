@@ -143,7 +143,6 @@ export const ApiProvider = ({ children }: ContextProps) => {
     setArticlePreview(
       (prev) => (prev = { slug, title, description, tagList, username, createdAt, image, favoritesCount }),
     );
-    console.log(favoritesCount);
   };
 
   return (
