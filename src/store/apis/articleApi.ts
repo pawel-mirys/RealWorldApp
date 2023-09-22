@@ -10,6 +10,7 @@ type FetchedData = {
 
 const articlesApi = createApi({
   reducerPath: 'articles',
+  tagTypes: ['Article'],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints(builder) {
     return {

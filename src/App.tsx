@@ -1,10 +1,11 @@
-import ArticlesList from './components/ArticlesList/ArticlesList';
+import { BrowserRouter } from 'react-router-dom';
+import RouterSwitch from './router/Router';
 
 function App() {
   return (
-    <>
-      <ArticlesList />
-    </>
+    <BrowserRouter>
+      <RouterSwitch />
+    </BrowserRouter>
   );
 }
 
