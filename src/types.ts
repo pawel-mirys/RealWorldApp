@@ -8,6 +8,7 @@ export type Author = {
 export type Article = {
   slug: string;
   title: string;
+  body: string;
   description: string;
   tagList: string[];
   createdAt: string;

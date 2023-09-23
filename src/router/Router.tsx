@@ -1,12 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
-import ArticlesList from '../components/ArticlesList/ArticlesList';
-import ArticleShow from '../components/ArticleShow/ArticleShow';
+
+import Home from '../pages/Home/Home';
+import Login from '../pages/Login/Login';
+import Register from '../pages/Register/Register';
+import Profile from '../pages/Profile/Profile';
+import ArticleShow from '../pages/ArticleShow/ArticleShow';
 
 const RouterSwitch = () => {
   return (
     <Routes>
-      <Route path='/' element={<ArticlesList />} />
       <Route path='/article/:slug' element={<ArticleShow />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<Register />} />
+      <Route path='/profiles/:username' element={<Profile />} />
+      <Route path='/' element={<Home />} />
     </Routes>
   );
 };
