@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams  } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import { useFetchArticlesQuery } from '../../store';
 import ArticleShowHeader from './modules/ArticleShowHeader';
@@ -45,7 +45,7 @@ const ArticleShow: React.FC = () => {
             variant='contained'
             size='small'
             onClick={() => {
-              navigate('/');
+              navigate(-1);
             }}>
             back
           </Button>

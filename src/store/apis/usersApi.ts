@@ -1,11 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { Author } from '../../types';
+import { FetchedAuthorData } from '../../types';
 
 const URL = 'https://api.realworld.io/api';
-
-type FetchedAuthorData = {
-  profile: Author;
-};
 
 const usersApi = createApi({
   reducerPath: 'user',

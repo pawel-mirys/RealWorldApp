@@ -1,12 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { Article } from '../../types';
+import { Author, FetchedArticlesData } from '../../types';
 
 const URL = 'https://api.realworld.io/api';
-
-type FetchedData = {
-  articles: Article[];
-  articlesCount: number;
-};
 
 const articlesApi = createApi({
   reducerPath: 'articles',
@@ -14,10 +9,21 @@ const articlesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints(builder) {
     return {
-      fetchArticles: builder.query<FetchedData, void>({
+      fetchArticles: builder.query<FetchedArticlesData, void>({
         query: () => {
           return {
             url: '/articles',
+            method: 'GET',
+          };
+        },
+      }),
+      fetchProfileArticles: builder.query<
+        FetchedArticlesData,
+        Author['username']
+      >({
+        query: (author: Author['username']) => {
+          return {
+            url: `/articles?author=${author}`,
             method: 'GET',
           };
         },
@@ -26,5 +32,6 @@ const articlesApi = createApi({
   },
 });
 
-export const { useFetchArticlesQuery } = articlesApi;
+export const { useFetchArticlesQuery, useFetchProfileArticlesQuery } =
+  articlesApi;
 export { articlesApi };

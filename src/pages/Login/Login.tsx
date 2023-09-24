@@ -1,6 +1,8 @@
+import { Button } from '@mui/material';
 import Form from '../../components/Form/Form';
 import FormInput from '../../components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
   email: string;
@@ -9,6 +11,7 @@ type Inputs = {
 
 const Login = () => {
   const { control, handleSubmit } = useForm<Inputs>();
+  const navigate = useNavigate();
   const inputs = (
     <div className='flex flex-col justify-end'>
       <FormInput
@@ -33,7 +36,22 @@ const Login = () => {
 
   return (
     <div className='flex justify-center'>
-      <Form inputs={inputs} handleSubmit={handleLogin} />
+      <div className='flex  flex-col items-center gap-5 mt-10'>
+        <div className='flex flex-col gap-2'>
+          <h2 className='text-4xl  text-center'>LogIn</h2>
+          <Button
+            onClick={() => {
+              navigate('/register');
+            }}>
+            Need an account?
+          </Button>
+        </div>
+        <Form
+          inputs={inputs}
+          submitButtonLabel='Login'
+          handleSubmit={handleLogin}
+        />
+      </div>
     </div>
   );
 };

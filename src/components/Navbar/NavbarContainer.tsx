@@ -29,7 +29,8 @@ const NavbarContainer: React.FC<NavbarContainerProps> = ({ pages, logo }) => {
   });
 
   return (
-    <nav className={clsx(styles.container, 'bg-[#1565C0] w-screen')}>
+    <nav
+      className={clsx(styles.container, 'bg-[#1565C0] w-screen sticky top-0')}>
       <div
         className={clsx(
           'flex flex-row  items-center justify-between gap-2   w-5/6 m-auto overflow-hidden'

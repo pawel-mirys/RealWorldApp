@@ -1,7 +1,9 @@
 import ArticlesList from '../../components/ArticlesList/ArticlesList';
+import { useFetchArticlesQuery } from '../../store';
 
 const Home = () => {
-  return <ArticlesList />;
+  const { data, isFetching, error } = useFetchArticlesQuery();
+  return <ArticlesList data={data} isFetching={isFetching} error={error} />;
 };
 
 export default Home;

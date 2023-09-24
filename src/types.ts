@@ -29,3 +29,12 @@ export type Comment = {
     following: boolean;
   };
 };
+
+export type FetchedArticlesData = {
+  articles: Article[];
+  articlesCount: number;
+};
+
+export type FetchedAuthorData = {
+  profile: Author;
+};

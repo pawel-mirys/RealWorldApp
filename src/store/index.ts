@@ -19,6 +19,9 @@ const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { useFetchArticlesQuery } from './apis/articleApi.ts';
+export {
+  useFetchArticlesQuery,
+  useFetchProfileArticlesQuery,
+} from './apis/articleApi.ts';
 export { useFetchUserQuery } from './apis/usersApi.ts';
 export { store };

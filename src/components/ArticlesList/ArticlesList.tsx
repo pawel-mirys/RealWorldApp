@@ -1,10 +1,23 @@
-import { useFetchArticlesQuery } from '../../store';
+
 import { useNavigate } from 'react-router-dom';
 import Article from '../Article/Article';
 import clsx from 'clsx';
 import styles from './ArticleList.module.scss';
-const ArticlesList = () => {
-  const { data, isFetching, error } = useFetchArticlesQuery();
+import { FetchedArticlesData } from '../../types';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { SerializedError } from '@reduxjs/toolkit';
+
+type ArticleListProps = {
+  data: FetchedArticlesData | undefined;
+  isFetching: boolean;
+  error: FetchBaseQueryError | SerializedError | undefined;
+};
+
+const ArticlesList: React.FC<ArticleListProps> = ({
+  data,
+  isFetching,
+  error,
+}) => {
   const navigate = useNavigate();
 
   const handleShowArticle = (slug: string) => {
