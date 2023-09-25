@@ -38,3 +38,7 @@ export type FetchedArticlesData = {
 export type FetchedAuthorData = {
   profile: Author;
 };
+
+export type FetchedPopularTagsData = {
+  tags: string[];
+};
