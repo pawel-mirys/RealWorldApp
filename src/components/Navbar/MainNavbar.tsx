@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const MainNavbar = () => {
   const navigate = useNavigate();
 
-  const pages = ['login', 'register'];
+  const pages = ['sign in', 'sign up'];
   const logo = (
     <div
       className={clsx(styles.logoContainer, 'cursor-pointer')}

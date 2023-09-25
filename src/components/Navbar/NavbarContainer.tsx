@@ -14,7 +14,8 @@ const NavbarContainer: React.FC<NavbarContainerProps> = ({ pages, logo }) => {
 
   const mappedPages = pages.map((page) => {
     const handleNavigate = () => {
-      navigate(`/${page}`);
+      const modifiedPageUrl = page.replace(/\s+/g, '');
+      navigate(`/${modifiedPageUrl}`);
     };
     return (
       <Button

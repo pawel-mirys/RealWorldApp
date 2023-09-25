@@ -1,22 +1,26 @@
-import { useForm } from 'react-hook-form';
+import { Button } from '@mui/material';
 import Form from '../../components/Form/Form';
 import FormInput from '../../components/FormInput/FormInput';
-import { Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
-  name: string;
   email: string;
   password: string;
 };
 
-const Register = () => {
+const SignIn = () => {
   const { control, handleSubmit } = useForm<Inputs>();
   const navigate = useNavigate();
   const inputs = (
-    <div className='flex flex-col justify-center'>
-      <FormInput type='text' control={control} name='name' label='Name' />
-      <FormInput type='email' control={control} name='email' label='Email' />
+    <div className='flex flex-col justify-end'>
+      <FormInput
+        type='email'
+        control={control}
+        name='email'
+        label='Email'
+        className=''
+      />
       <FormInput
         type='password'
         control={control}
@@ -26,7 +30,7 @@ const Register = () => {
     </div>
   );
 
-  const handleRegister = () => {
+  const handleLogin = () => {
     handleSubmit;
   };
 
@@ -34,21 +38,22 @@ const Register = () => {
     <div className='flex justify-center'>
       <div className='flex  flex-col items-center gap-5 mt-10'>
         <div className='flex flex-col gap-2'>
-          <h2 className='text-4xl  text-center'>LogIn</h2>
+          <h2 className='text-4xl  text-center'>Sign In</h2>
           <Button
             onClick={() => {
-              navigate('/login');
+              navigate('/signin');
             }}>
-            Have an account?
+            Need an account?
           </Button>
         </div>
         <Form
           inputs={inputs}
-          submitButtonLabel='Register'
-          handleSubmit={handleRegister}
+          submitButtonLabel='Login'
+          handleSubmit={handleLogin}
         />
       </div>
     </div>
   );
 };
-export default Register;
+
+export default SignIn;
