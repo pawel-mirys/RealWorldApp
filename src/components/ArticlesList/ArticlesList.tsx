@@ -1,11 +1,11 @@
-
 import { useNavigate } from 'react-router-dom';
-import Article from '../Article/Article';
+
 import clsx from 'clsx';
 import styles from './ArticleList.module.scss';
-import { FetchedArticlesData } from '../../types';
+import { ArticleData, FetchedArticlesData } from '../../types';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import Article from '../Article/Article';
 
 type ArticleListProps = {
   data: FetchedArticlesData | undefined;
@@ -31,7 +31,7 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   } else if (error) {
     content = <div>Error while fetching articles {`${error}`}</div>;
   } else {
-    content = data?.articles.map((article) => {
+    content = data?.articles.map((article: ArticleData) => {
       return (
         <Article
           key={`${article.slug}${Math.random()}`}

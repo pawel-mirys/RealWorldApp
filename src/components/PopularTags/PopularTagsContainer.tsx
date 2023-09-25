@@ -2,6 +2,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { FetchedPopularTagsData } from '../../types';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { Button } from '@mui/material';
+import { updateTagState, useAppDispatch } from '../../store';
 
 type PopularTagsContainerProps = {
   data: FetchedPopularTagsData['tags'];
@@ -14,6 +15,14 @@ const PopularTagsContainer: React.FC<PopularTagsContainerProps> = ({
   isLoading,
   error,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const handlePickTag = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const tagName = e.currentTarget.innerText;
+
+    dispatch(updateTagState(tagName));
+  };
+
   let content;
 
   if (isLoading) {
@@ -24,6 +33,8 @@ const PopularTagsContainer: React.FC<PopularTagsContainerProps> = ({
     content = data.map((tag) => {
       return (
         <Button
+          key={tag}
+          onClick={handlePickTag}
           size='small'
           sx={{ color: 'gray', fontSize: '10px' }}
           color='inherit'>

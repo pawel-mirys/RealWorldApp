@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Article as ArticleData } from '../../types';
+import { ArticleData } from '../../types';
 import clsx from 'clsx';
 import styles from './Article.module.scss';
 import Author from '../Author/Author';

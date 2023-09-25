@@ -5,7 +5,7 @@ export type Author = {
   following: boolean;
 };
 
-export type Article = {
+export type ArticleData = {
   slug: string;
   title: string;
   body: string;
@@ -31,7 +31,7 @@ export type Comment = {
 };
 
 export type FetchedArticlesData = {
-  articles: Article[];
+  articles: ArticleData[];
   articlesCount: number;
 };
 
@@ -42,3 +42,7 @@ export type FetchedAuthorData = {
 export type FetchedPopularTagsData = {
   tags: string[];
 };
+
+export interface AppState {
+  tagState: string | null;
+}

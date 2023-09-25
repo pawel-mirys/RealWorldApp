@@ -12,11 +12,20 @@ const articlesApi = createApi({
       fetchArticles: builder.query<FetchedArticlesData, void>({
         query: () => {
           return {
-            url: '/articles',
+            url: '/articles?limit=50',
             method: 'GET',
           };
         },
       }),
+      fetchArticlesByTag: builder.query<FetchedArticlesData, string>({
+        query: (tag: string) => {
+          return {
+            url: `/articles?tag=${tag.toLowerCase()}`,
+            method: 'GET',
+          };
+        },
+      }),
+
       fetchProfileArticles: builder.query<
         FetchedArticlesData,
         Author['username']
@@ -32,6 +41,9 @@ const articlesApi = createApi({
   },
 });
 
-export const { useFetchArticlesQuery, useFetchProfileArticlesQuery } =
-  articlesApi;
+export const {
+  useFetchArticlesQuery,
+  useFetchProfileArticlesQuery,
+  useFetchArticlesByTagQuery,
+} = articlesApi;
 export { articlesApi };
