@@ -1,10 +1,9 @@
 import clsx from 'clsx';
-import { Article } from '../../../types';
+import { ArticleData } from '../../../types';
 import Author from '../../../components/Author/Author';
 
-
 type ArticleShowHeaderProps = {
-  article: Article;
+  article: ArticleData;
 };
 
 const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
@@ -18,10 +17,10 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
         'article-header',
         'flex flex-col gap-10 bg-zinc-700 py-7'
       )}>
-      <h2 className={clsx('text-5xl font-bold text-gray-200 w-5/6 m-auto ')}>
+      <h2 className={clsx('text-4xl font-bold text-gray-200 w-4/6 m-auto ')}>
         {article.title}
       </h2>
-      <Author article={article} buttons className='w-5/6 m-auto' />
+      <Author article={article} buttons className='w-4/6 m-auto' />
     </header>
   );
 };

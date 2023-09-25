@@ -6,7 +6,15 @@ const FilteredArticlesList = () => {
 
   const { data, isFetching, error } = useFetchArticlesByTagQuery(tagState.tag);
 
-  return <ArticlesList data={data} isFetching={isFetching} error={error} />;
+  let list;
+
+  if (data && data?.articles.length > 0) {
+    list = <ArticlesList data={data} isFetching={isFetching} error={error} />;
+  } else {
+    list = <div className='mt-5 text-lg'>No Articles To show...</div>;
+  }
+
+  return list;
 };
 
 export default FilteredArticlesList;

@@ -35,10 +35,10 @@ const ArticleShow: React.FC = () => {
         <div className={clsx('article-show', 'flex flex-col gap-7 ')}>
           <ArticleShowHeader article={article} />
           <>
-            <div className={clsx('content', 'w-5/6 m-auto text-lg')}>
+            <div className={clsx('content', 'w-4/6 m-auto text-lg')}>
               <p>{article.body}</p>
             </div>
-            <div className={clsx('tags', 'w-5/6 m-auto')}>{tagsList}</div>
+            <div className={clsx('tags', 'w-4/6 m-auto')}>{tagsList}</div>
           </>
           <ArticleShowFooter />
           <Button

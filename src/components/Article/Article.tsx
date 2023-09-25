@@ -25,8 +25,18 @@ const Article: React.FC<ArticleProps> = ({
         className
       )}>
       <Author article={article} />
-      <div className={clsx('article-content cursor-pointer')} onClick={onClick}>
-        <h2 className={clsx('article-title', 'text-lg font-bold')}>
+      <div
+        className={clsx(
+          styles.articleContent,
+          'article-content cursor-pointer'
+        )}
+        onClick={onClick}>
+        <h2
+          className={clsx(
+            styles.articleTitle,
+            'article-title',
+            'text-lg font-bold '
+          )}>
           {article.title}
         </h2>
         <div className={clsx('article-description text-sm')}>

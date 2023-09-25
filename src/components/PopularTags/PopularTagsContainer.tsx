@@ -36,8 +36,10 @@ const PopularTagsContainer: React.FC<PopularTagsContainerProps> = ({
           key={tag}
           onClick={handlePickTag}
           size='small'
-          sx={{ color: 'gray', fontSize: '10px' }}
-          color='inherit'>
+          sx={{
+            fontSize: '10px',
+          }}
+          color='primary'>
           {tag}
         </Button>
       );

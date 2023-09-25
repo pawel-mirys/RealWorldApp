@@ -1,0 +1,17 @@
+.mainArticleContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  margin: auto;
+}
+
+.aricleListContainer {
+  width: 90%;
+}
+
+.list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
