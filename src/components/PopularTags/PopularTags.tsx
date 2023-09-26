@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useFetchPopularTagsQuery } from '../../store';
-import PopularTagsContainer from './PopularTagsContainer';
+import TagsList from '../TagsList/TagsList';
 
 type PopularTagsProps = {
   className?: string;
@@ -18,9 +18,7 @@ const PopularTags: React.FC<PopularTagsProps> = ({ className }) => {
         'flex flex-row flex-wrap  h-2/5 gap-3 p-3 border-solid border-black border rounded mt-10'
       )}>
       <p className='block w-full'>Popular tags: </p>
-      {tags && (
-        <PopularTagsContainer data={tags} isLoading={isLoading} error={error} />
-      )}
+      {tags && <TagsList data={tags} isLoading={isLoading} error={error} />}
     </div>
   );
 };

@@ -8,12 +8,14 @@ type PopularTagsContainerProps = {
   data: FetchedPopularTagsData['tags'];
   isLoading: boolean;
   error: FetchBaseQueryError | SerializedError | undefined;
+  disabled?: boolean;
 };
 
-const PopularTagsContainer: React.FC<PopularTagsContainerProps> = ({
+const TagsList: React.FC<PopularTagsContainerProps> = ({
   data,
   isLoading,
   error,
+  disabled,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -34,10 +36,11 @@ const PopularTagsContainer: React.FC<PopularTagsContainerProps> = ({
       return (
         <Button
           key={tag}
+          disabled={disabled}
           onClick={handlePickTag}
           size='small'
           sx={{
-            fontSize: '10px',
+            fontSize: '12px',
             typography: {
               textTransform: 'none',
             },
@@ -52,4 +55,4 @@ const PopularTagsContainer: React.FC<PopularTagsContainerProps> = ({
   return <>{content}</>;
 };
 
-export default PopularTagsContainer;
+export default TagsList;

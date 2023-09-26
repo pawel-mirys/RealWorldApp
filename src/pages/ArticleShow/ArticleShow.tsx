@@ -4,6 +4,7 @@ import { useFetchArticlesBySlugQuery } from '../../store';
 import ArticleShowHeader from './modules/ArticleShowHeader';
 import ArticleShowFooter from './modules/ArticleShowFooter';
 import clsx from 'clsx';
+import TagsList from '../../components/TagsList/TagsList';
 
 const ArticleShow: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -19,23 +20,6 @@ const ArticleShow: React.FC = () => {
   } else if (data) {
     const article = data?.article;
 
-    const tagsList = article?.tagList.map((tag) => {
-      return (
-        <Button
-          key={tag}
-          sx={{
-            color: 'grey',
-            fontSize: '10px',
-            typography: {
-              textTransform: 'none',
-            },
-          }}
-          color='inherit'>
-          {tag}
-        </Button>
-      );
-    });
-
     content = (
       <Box>
         <div className={clsx('article-show', 'flex flex-col gap-7 ')}>
@@ -44,7 +28,14 @@ const ArticleShow: React.FC = () => {
             <div className={clsx('content', 'w-4/6 m-auto text-lg')}>
               <p>{article.body}</p>
             </div>
-            <div className={clsx('tags', 'w-4/6 m-auto')}>{tagsList}</div>
+            <div className={clsx('tags', 'w-4/6 m-auto')}>
+              <TagsList
+                data={article.tagList}
+                isLoading={isFetching}
+                error={error}
+                disabled
+              />
+            </div>
           </>
           <ArticleShowFooter />
           <Button
