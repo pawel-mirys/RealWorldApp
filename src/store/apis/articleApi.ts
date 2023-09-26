@@ -9,10 +9,10 @@ const articlesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints(builder) {
     return {
-      fetchArticles: builder.query<FetchedArticlesData, void>({
-        query: () => {
+      fetchArticles: builder.query<FetchedArticlesData, number>({
+        query: (offset: number) => {
           return {
-            url: '/articles?limit=50',
+            url: `/articles?limit=10&offset=${offset}`,
             method: 'GET',
           };
         },
@@ -46,6 +46,14 @@ const articlesApi = createApi({
           };
         },
       }),
+      fetchArticlesCount: builder.query<FetchedArticlesData, void>({
+        query: () => {
+          return {
+            url: '/articles',
+            method: 'GET',
+          };
+        },
+      }),
     };
   },
 });
@@ -55,5 +63,6 @@ export const {
   useFetchProfileArticlesQuery,
   useFetchArticlesByTagQuery,
   useFetchArticlesBySlugQuery,
+  useFetchArticlesCountQuery,
 } = articlesApi;
 export { articlesApi };

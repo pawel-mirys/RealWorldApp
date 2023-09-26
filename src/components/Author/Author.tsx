@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import styles from './Aythor.module.scss';
-import { Article } from '../../types';
 import { Button, ButtonGroup } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -8,9 +7,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useFetchUserQuery } from '../../store';
+import { ArticleData } from '../../types';
 
 type AuthorProps = {
-  article: Article;
+  article: ArticleData;
   className?: string;
   buttons?: boolean;
 };
@@ -28,7 +28,6 @@ const Author: React.FC<AuthorProps> = ({
   const navigate = useNavigate();
 
   const handleShowProfile = (username: string) => {
-    console.log(profile);
     navigate(`/profiles/${username}`);
   };
 

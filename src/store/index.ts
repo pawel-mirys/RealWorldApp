@@ -5,10 +5,12 @@ import { usersApi } from './apis/usersApi.ts';
 import { tagsApi } from './apis/tagsApi.ts';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import popularTagSlice from './slices/tagSlice.ts';
+import paginationSlice from './slices/paginationSlice.ts';
 
 const store = configureStore({
   reducer: {
     popularTagState: popularTagSlice.reducer,
+    currentPageState: paginationSlice.reducer,
     [articlesApi.reducerPath]: articlesApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [tagsApi.reducerPath]: tagsApi.reducer,
@@ -34,6 +36,7 @@ export {
   useFetchProfileArticlesQuery,
   useFetchArticlesByTagQuery,
   useFetchArticlesBySlugQuery,
+  useFetchArticlesCountQuery,
 } from './apis/articleApi.ts';
 
 export { useFetchUserQuery } from './apis/usersApi.ts';
@@ -41,5 +44,7 @@ export { useFetchUserQuery } from './apis/usersApi.ts';
 export { useFetchPopularTagsQuery } from './apis/tagsApi.ts';
 
 export const { updateTagState } = popularTagSlice.actions;
+
+export const { updateCurrentPage } = paginationSlice.actions;
 
 export { store, useAppDispatch, useAppSelector };

@@ -7,7 +7,9 @@ type ProfileHeaderProps = {
 };
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
-  const { data, isLoading, error } = useFetchUserQuery(username || '');
+  const { data, isLoading, error } = useFetchUserQuery(username || '', {
+    refetchOnMountOrArgChange: false,
+  });
   const profileData = data?.profile;
 
   const Component = () => {

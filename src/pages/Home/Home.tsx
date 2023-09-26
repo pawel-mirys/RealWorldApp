@@ -10,11 +10,15 @@ import {
 } from '../../store';
 import styles from './Home.module.scss';
 import clsx from 'clsx';
+import PaginationBar from '../../components/Pagination/Pagination';
 
 const Home = () => {
-  const { data, isFetching, error } = useFetchArticlesQuery();
+  const page = useAppSelector((state) => state.currentPageState);
+
+  const { data, isFetching, error } = useFetchArticlesQuery(page.offset);
   const tagState = useAppSelector((state) => state.popularTagState);
   const dispatch = useAppDispatch();
+
   let list;
 
   if (tagState.tag === '') {
@@ -35,6 +39,7 @@ const Home = () => {
           {tagState.tag !== '' && <Button disabled>#{tagState.tag}</Button>}
         </div>
         <div className={clsx(styles.list)}>{list}</div>
+        <PaginationBar />
       </div>
       <PopularTags className='w-2/6' />
     </main>
