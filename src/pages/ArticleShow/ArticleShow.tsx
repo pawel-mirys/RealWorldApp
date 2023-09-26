@@ -1,22 +1,25 @@
-import { useNavigate, useParams  } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
-import { useFetchArticlesQuery } from '../../store';
+import { useFetchArticlesBySlugQuery } from '../../store';
 import ArticleShowHeader from './modules/ArticleShowHeader';
 import ArticleShowFooter from './modules/ArticleShowFooter';
 import clsx from 'clsx';
 
 const ArticleShow: React.FC = () => {
-  const { data } = useFetchArticlesQuery();
   const { slug } = useParams<{ slug: string }>();
+  const { data, isFetching, error } = useFetchArticlesBySlugQuery(slug!);
   const navigate = useNavigate();
 
-  const articles = data && data.articles;
-  const article = articles?.find((article) => {
-    return article.slug === slug;
-  });
+  let content;
 
-  const tagsList = articles?.map((article) => {
-    const tags = article.tagList.map((tag) => {
+  if (isFetching) {
+    content = <div>Fetching article data...</div>;
+  } else if (error) {
+    content = <div>Error while fetching data...</div>;
+  } else if (data) {
+    const article = data?.article;
+
+    const tagsList = article?.tagList.map((tag) => {
       return (
         <Button
           key={tag}
@@ -26,12 +29,9 @@ const ArticleShow: React.FC = () => {
         </Button>
       );
     });
-    return tags;
-  });
 
-  return (
-    <Box>
-      {article && (
+    content = (
+      <Box>
         <div className={clsx('article-show', 'flex flex-col gap-7 ')}>
           <ArticleShowHeader article={article} />
           <>
@@ -50,9 +50,11 @@ const ArticleShow: React.FC = () => {
             back
           </Button>
         </div>
-      )}
-    </Box>
-  );
+      </Box>
+    );
+  }
+
+  return content;
 };
 
 export default ArticleShow;

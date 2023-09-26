@@ -33,6 +33,7 @@ export {
   useFetchArticlesQuery,
   useFetchProfileArticlesQuery,
   useFetchArticlesByTagQuery,
+  useFetchArticlesBySlugQuery,
 } from './apis/articleApi.ts';
 
 export { useFetchUserQuery } from './apis/usersApi.ts';
