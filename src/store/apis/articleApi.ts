@@ -29,7 +29,7 @@ const articlesApi = createApi({
       fetchArticlesByTag: builder.query<FetchedArticlesData, string>({
         query: (tag: string) => {
           return {
-            url: `/articles?tag=${tag.toLowerCase()}`,
+            url: `/articles?tag=${tag}`,
             method: 'GET',
           };
         },

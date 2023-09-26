@@ -38,6 +38,9 @@ const PopularTagsContainer: React.FC<PopularTagsContainerProps> = ({
           size='small'
           sx={{
             fontSize: '10px',
+            typography: {
+              textTransform: 'none',
+            },
           }}
           color='primary'>
           {tag}

@@ -23,7 +23,13 @@ const ArticleShow: React.FC = () => {
       return (
         <Button
           key={tag}
-          sx={{ color: 'grey', fontSize: '10px' }}
+          sx={{
+            color: 'grey',
+            fontSize: '10px',
+            typography: {
+              textTransform: 'none',
+            },
+          }}
           color='inherit'>
           {tag}
         </Button>

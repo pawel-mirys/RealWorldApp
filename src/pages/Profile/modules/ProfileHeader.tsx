@@ -30,7 +30,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
             {profileData?.username}
           </div>
           {profileData?.bio && (
-            <div className='profile-bio w-5/6 text-gray-100 text-lg mt-3'>
+            <div className='profile-bio w-5/6 text-gray-100 text-lg mt-3 text-center'>
               {profileData?.bio}
             </div>
           )}
