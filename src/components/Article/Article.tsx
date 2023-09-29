@@ -24,11 +24,11 @@ const Article: React.FC<ArticleProps> = ({
         ' flex flex-col flex-grow-1 gap-2',
         className
       )}>
-      <Author article={article} />
+      <Author authorData={article.author} createdAt={article.createdAt} />
       <div
         className={clsx(
           styles.articleContent,
-          'article-content cursor-pointer'
+          'article-content cursor-pointer flex flex-col gap-3'
         )}
         onClick={onClick}>
         <h2

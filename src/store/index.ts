@@ -37,6 +37,7 @@ export {
   useFetchArticlesByTagQuery,
   useFetchArticlesBySlugQuery,
   useFetchArticlesCountQuery,
+  useFetchArticleCommentsQuery,
 } from './apis/articleApi.ts';
 
 export { useFetchUserQuery } from './apis/usersApi.ts';

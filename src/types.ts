@@ -22,12 +22,11 @@ export type Comment = {
   createdAt: string;
   updatedAt: string;
   body: string;
-  author: {
-    username: string;
-    bio: string;
-    image: string;
-    following: boolean;
-  };
+  author: Author;
+};
+
+export type FetchedCommentData = {
+  comments: Comment[];
 };
 
 export type FetchedArticlesData = {

@@ -7,20 +7,20 @@ const ArticleShowFooter = () => {
     <div className={clsx('article-footer', 'w-auto m-auto')}>
       <span
         onClick={() => {
-          navigate('/login');
+          navigate('/signin');
         }}
         className='text-blue-600 cursor-pointer mr-1'>
-        Login
+        Sign In
       </span>
       or
       <span
         onClick={() => {
-          navigate('/register');
+          navigate('/signup');
         }}
         className='text-blue-600 cursor-pointer m-1'>
-        Register
+        Sign Up
       </span>
-      to see comments.
+      to add comments on this article.
     </div>
   );
 };

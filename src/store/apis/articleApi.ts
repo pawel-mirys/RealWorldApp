@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { ArticleData, Author, FetchedArticlesData } from '../../types';
+import {
+  ArticleData,
+  Author,
+  FetchedArticlesData,
+  FetchedCommentData,
+} from '../../types';
 
 const URL = 'https://api.realworld.io/api';
 
@@ -13,6 +18,14 @@ const articlesApi = createApi({
         query: (offset: number) => {
           return {
             url: `/articles?limit=10&offset=${offset}`,
+            method: 'GET',
+          };
+        },
+      }),
+      fetchArticleComments: builder.query<FetchedCommentData, string>({
+        query: (slug: string) => {
+          return {
+            url: `/articles/${slug}/comments`,
             method: 'GET',
           };
         },
@@ -64,5 +77,6 @@ export const {
   useFetchArticlesByTagQuery,
   useFetchArticlesBySlugQuery,
   useFetchArticlesCountQuery,
+  useFetchArticleCommentsQuery,
 } = articlesApi;
 export { articlesApi };

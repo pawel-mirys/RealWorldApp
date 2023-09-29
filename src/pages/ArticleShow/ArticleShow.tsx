@@ -5,10 +5,13 @@ import ArticleShowHeader from './modules/ArticleShowHeader';
 import ArticleShowFooter from './modules/ArticleShowFooter';
 import clsx from 'clsx';
 import TagsList from '../../components/TagsList/TagsList';
+import ArticleShowComments from './modules/ArticleShowComments';
 
 const ArticleShow: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data, isFetching, error } = useFetchArticlesBySlugQuery(slug!);
+
+  console.log(data);
   const navigate = useNavigate();
 
   let content;
@@ -36,8 +39,10 @@ const ArticleShow: React.FC = () => {
                 disabled
               />
             </div>
+            <ArticleShowFooter />
+            <ArticleShowComments slug={slug || ''} />
           </>
-          <ArticleShowFooter />
+
           <Button
             variant='contained'
             size='small'
