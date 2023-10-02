@@ -41,7 +41,7 @@ const SignIn = () => {
           <h2 className='text-4xl  text-center'>Sign In</h2>
           <Button
             onClick={() => {
-              navigate('/signin');
+              navigate('/signup');
             }}>
             Need an account?
           </Button>

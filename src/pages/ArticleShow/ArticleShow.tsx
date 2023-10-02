@@ -40,17 +40,17 @@ const ArticleShow: React.FC = () => {
               />
             </div>
             <ArticleShowFooter />
+            <Button
+              variant='contained'
+              size='small'
+              sx={{ position: 'sticky', top: 60 }}
+              onClick={() => {
+                navigate(-1);
+              }}>
+              back
+            </Button>
             <ArticleShowComments slug={slug || ''} />
           </>
-
-          <Button
-            variant='contained'
-            size='small'
-            onClick={() => {
-              navigate(-1);
-            }}>
-            back
-          </Button>
         </div>
       </Box>
     );

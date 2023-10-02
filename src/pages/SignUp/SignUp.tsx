@@ -37,7 +37,7 @@ const SignUp = () => {
           <h2 className='text-4xl  text-center'>Sign Up</h2>
           <Button
             onClick={() => {
-              navigate('/signup');
+              navigate('/signin');
             }}>
             Have an account?
           </Button>
