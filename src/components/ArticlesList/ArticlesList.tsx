@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import clsx from 'clsx';
 import styles from './ArticleList.module.scss';
 import { ArticleData, FetchedArticlesData } from '../../types';
@@ -18,12 +16,6 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   isFetching,
   error,
 }) => {
-  const navigate = useNavigate();
-
-  const handleShowArticle = (slug: string) => {
-    navigate(`/article/${slug}`);
-  };
-
   let content;
 
   if (isFetching) {
@@ -33,11 +25,7 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   } else {
     content = data?.articles.map((article: ArticleData) => {
       return (
-        <Article
-          key={`${article.slug}${Math.random()}`}
-          article={article}
-          onClick={() => handleShowArticle(article.slug)}
-        />
+        <Article key={`${article.slug}${Math.random()}`} article={article} />
       );
     });
   }

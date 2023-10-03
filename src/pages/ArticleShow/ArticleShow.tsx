@@ -11,7 +11,6 @@ const ArticleShow: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data, isFetching, error } = useFetchArticlesBySlugQuery(slug!);
 
-  console.log(data);
   const navigate = useNavigate();
 
   let content;
