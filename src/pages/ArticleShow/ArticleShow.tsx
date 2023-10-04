@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Skeleton } from '@mui/material';
 import { useFetchArticlesBySlugQuery } from '../../store';
 import ArticleShowHeader from './modules/ArticleShowHeader';
 import ArticleShowFooter from './modules/ArticleShowFooter';
@@ -16,7 +16,11 @@ const ArticleShow: React.FC = () => {
   let content;
 
   if (isFetching) {
-    content = <div>Fetching article data...</div>;
+    content = (
+      <>
+        <Skeleton animation='wave' height={'300px'} />;
+      </>
+    );
   } else if (error) {
     content = <div>Error while fetching data...</div>;
   } else if (data) {

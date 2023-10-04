@@ -4,6 +4,7 @@ import { ArticleData, FetchedArticlesData } from '../../types';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import Article from '../Article/Article';
+import { Skeleton } from '@mui/material';
 
 type ArticleListProps = {
   data: FetchedArticlesData | undefined;
@@ -19,9 +20,13 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   let content;
 
   if (isFetching) {
-    content = <div>Loading articles...</div>;
+    const skeletons: JSX.Element[] = [];
+    for (let i = 0; i <= 10; i++) {
+      skeletons.push(<Skeleton animation='wave' key={i} height={'150px'} />);
+    }
+    content = skeletons;
   } else if (error) {
-    content = <div>Error while fetching articles {`${error}`}</div>;
+    content = <div>Error while fetching articles...</div>;
   } else {
     content = data?.articles.map((article: ArticleData) => {
       return (

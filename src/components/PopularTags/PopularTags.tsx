@@ -15,7 +15,7 @@ const PopularTags: React.FC<PopularTagsProps> = ({ className }) => {
     <div
       className={clsx(
         className,
-        'flex flex-row flex-wrap  h-2/5 gap-3 p-3 border-solid border-black border rounded mt-10'
+        'flex flex-row flex-wrap h-2/5 gap-3 p-3 border-solid border-black border rounded mt-10'
       )}>
       <p className='block w-full'>Popular tags: </p>
       {tags && <TagsList data={tags} isLoading={isLoading} error={error} />}
