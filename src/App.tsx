@@ -7,7 +7,7 @@ function App() {
   return (
     <HashRouter>
       <MainNavbar />
-      <div className='w-full text-center m-3'>
+      <div className='w-full  text-center m-3'>
         Note: This project is still in the development process... Some features
         may be unavailable or may not work correctly
       </div>

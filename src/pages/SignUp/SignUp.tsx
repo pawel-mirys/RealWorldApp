@@ -13,6 +13,11 @@ type Inputs = {
 const SignUp = () => {
   const { control, handleSubmit } = useForm<Inputs>();
   const navigate = useNavigate();
+
+  const handleSignUp = (data: Inputs) => {
+    console.log(data);
+  };
+
   const inputs = (
     <div className='flex flex-col justify-center'>
       <FormInput type='text' control={control} name='name' label='Name' />
@@ -26,12 +31,8 @@ const SignUp = () => {
     </div>
   );
 
-  const handleSignUp = () => {
-    handleSubmit;
-  };
-
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center h-screen'>
       <div className='flex  flex-col items-center gap-5 mt-10'>
         <div className='flex flex-col gap-2'>
           <h2 className='text-4xl  text-center'>Sign Up</h2>
@@ -44,8 +45,8 @@ const SignUp = () => {
         </div>
         <Form
           inputs={inputs}
-          submitButtonLabel='Register'
-          handleSubmit={handleSignUp}
+          submitButtonLabel='Sign Up'
+          handleSubmit={handleSubmit(handleSignUp)}
         />
       </div>
     </div>

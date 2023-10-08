@@ -42,6 +42,19 @@ export type FetchedPopularTagsData = {
   tags: string[];
 };
 
-export interface AppState {
+export type AppState = {
   tagState: string | null;
-}
+};
+
+export type User = {
+  email: string;
+  token: string;
+  username: string;
+  bio: string;
+  image: string;
+};
+
+export type UserLogin = {
+  email: string;
+  password: string;
+};

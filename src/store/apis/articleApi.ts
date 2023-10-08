@@ -22,6 +22,7 @@ const articlesApi = createApi({
           };
         },
       }),
+
       fetchArticleComments: builder.query<FetchedCommentData, string>({
         query: (slug: string) => {
           return {
