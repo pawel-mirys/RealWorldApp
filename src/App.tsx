@@ -3,7 +3,25 @@ import RouterSwitch from './router/Router';
 import MainNavbar from './components/Navbar/MainNavbar';
 import Footer from './components/Footer/Footer';
 
+import {
+  updateUserData,
+  useAppDispatch,
+  useAppSelector,
+  useGetCurrentUserDataQuery,
+} from './store';
+import { useEffect } from 'react';
+import { skipToken } from '@reduxjs/toolkit/query';
+
 function App() {
+  const token = useAppSelector((state) => state.tokenState.token);
+  const dispatch = useAppDispatch();
+
+  const { data } = useGetCurrentUserDataQuery(token ?? skipToken);
+
+  useEffect(() => {
+    data && dispatch(updateUserData(data?.user));
+  }, [data, dispatch]);
+
   return (
     <HashRouter>
       <MainNavbar />

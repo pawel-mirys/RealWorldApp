@@ -10,6 +10,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
   const { data, isLoading, error } = useFetchProfileQuery(username || '', {
     refetchOnMountOrArgChange: false,
   });
+
   const profileData = data?.profile;
 
   const Component = () => {
@@ -37,7 +38,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
             </div>
           )}
           <Button sx={{ mt: '15px' }} variant='contained'>
-            <AddIcon /> Foollow {profileData?.username}
+            <AddIcon /> Follow {profileData?.username}
           </Button>
         </header>
       );

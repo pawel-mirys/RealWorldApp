@@ -4,7 +4,6 @@ import FormInput from '../../components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import {
-  updateUserData,
   useAppDispatch,
   useLoginUserMutation,
 } from '../../store';
@@ -42,10 +41,9 @@ const SignIn = () => {
     </div>
   );
 
-  const updateData = useCallback(() => {
+  const updateToken = useCallback(() => {
     if (isSuccess) {
       data && dispatch(setToken(data?.user.token));
-      data && dispatch(updateUserData(data.user));
       navigate('/');
     }
   }, [isSuccess, data, dispatch, navigate]);
@@ -55,8 +53,8 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    updateData();
-  }, [data, updateData]);
+    updateToken();
+  }, [data, updateToken]);
 
   return (
     <div className='flex justify-center h-screen'>

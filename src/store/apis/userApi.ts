@@ -23,9 +23,21 @@ const userApi = createApi({
           };
         },
       }),
+      getCurrentUserData: builder.query<{ user: User }, string | null>({
+        query: (token: string) => {
+          return {
+            url: '/user',
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useLoginUserMutation } = userApi;
+export const { useLoginUserMutation, useGetCurrentUserDataQuery } = userApi;
 export { userApi };
