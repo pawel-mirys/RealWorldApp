@@ -55,6 +55,6 @@ export const { updateTagState } = popularTagSlice.actions;
 
 export const { updateCurrentPage } = paginationSlice.actions;
 
-export const { setToken } = authSlice.actions;
+export const { setToken, resetToken } = authSlice.actions;
 
 export { store, useAppDispatch, useAppSelector };

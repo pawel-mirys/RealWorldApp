@@ -1,34 +1,15 @@
-import { Button, ButtonGroup } from '@mui/material';
+import { ButtonGroup } from '@mui/material';
 
 import styles from './Navbar.module.scss';
-import { useNavigate } from 'react-router-dom';
+
 import clsx from 'clsx';
 
 type NavbarContainerProps = {
-  pages: string[];
+  pages: JSX.Element;
   logo?: JSX.Element;
 };
 
 const NavbarContainer: React.FC<NavbarContainerProps> = ({ pages, logo }) => {
-  const navigate = useNavigate();
-
-  const mappedPages = pages.map((page) => {
-    const handleNavigate = () => {
-      const modifiedPageUrl = page.replace(/\s+/g, '');
-      navigate(`/${modifiedPageUrl}`);
-    };
-    return (
-      <Button
-        key={page}
-        sx={{ color: 'white' }}
-        variant='outlined'
-        color='inherit'
-        onClick={handleNavigate}>
-        {page}
-      </Button>
-    );
-  });
-
   return (
     <nav
       className={clsx(
@@ -41,7 +22,7 @@ const NavbarContainer: React.FC<NavbarContainerProps> = ({ pages, logo }) => {
         )}>
         {logo}
         <ButtonGroup className={clsx(styles.navigation, 'flex flex-row ')}>
-          {mappedPages}
+          {pages}
         </ButtonGroup>
       </div>
     </nav>

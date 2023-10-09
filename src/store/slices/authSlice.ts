@@ -5,7 +5,7 @@ type AuthState = {
 };
 
 const loadTokenFromLocalStorage = (): string | null => {
-  return localStorage.getItem('token') || null;
+  return localStorage.getItem('jwtToken') || null;
 };
 
 const initialState: AuthState = {
@@ -17,10 +17,12 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     setToken: (state, action: PayloadAction<string | null>) => {
-      state.token = action.payload;
-      action.payload
-        ? localStorage.setItem('jwtToken', action.payload)
-        : localStorage.removeItem('jwtToken');
+      (state.token = action.payload),
+        action.payload && localStorage.setItem('jwtToken', action.payload);
+    },
+    resetToken: (state) => {
+      state.token = null;
+      localStorage.removeItem('jwtToken');
     },
   },
 });
