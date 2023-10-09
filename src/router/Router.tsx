@@ -6,6 +6,7 @@ import SignUp from '../pages/SignUp/SignUp';
 import Profile from '../pages/Profile/Profile';
 import ArticleShow from '../pages/ArticleShow/ArticleShow';
 import useAuthStatus from '../hooks/useAuthStatus';
+import NotFound from '../pages/NotFound/NotFound';
 
 const RouterSwitch = () => {
   const isLoggedIn = useAuthStatus();
@@ -23,6 +24,7 @@ const RouterSwitch = () => {
         element={isLoggedIn ? <Navigate to={'/'} /> : <SignUp />}
       />
       <Route path='/' element={<Home />} />
+      <Route path='*' element={<NotFound />} />
     </Routes>
   );
 };
