@@ -3,6 +3,10 @@ import Form from '../../components/Form/Form';
 import FormInput from '../../components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useLoginUserMutation } from '../../store';
+
+import { setToken } from '../../store';
+import { useCallback, useEffect } from 'react';
 
 type Inputs = {
   email: string;
@@ -12,6 +16,9 @@ type Inputs = {
 const SignIn = () => {
   const { control, handleSubmit } = useForm<Inputs>();
   const navigate = useNavigate();
+  const [loginUser, { isSuccess, data }] = useLoginUserMutation();
+  const dispatch = useAppDispatch();
+
   const inputs = (
     <div className='flex flex-col justify-end'>
       <FormInput
@@ -30,12 +37,23 @@ const SignIn = () => {
     </div>
   );
 
-  const handleLogin = () => {
-    handleSubmit;
+  const updateToken = useCallback(() => {
+    if (isSuccess) {
+      data && dispatch(setToken(data?.user.token));
+      navigate('/');
+    }
+  }, [isSuccess, data, dispatch, navigate]);
+
+  const handleLogin = (inputsData: Inputs) => {
+    loginUser(inputsData);
   };
 
+  useEffect(() => {
+    updateToken();
+  }, [data, updateToken]);
+
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center h-screen'>
       <div className='flex  flex-col items-center gap-5 mt-10'>
         <div className='flex flex-col gap-2'>
           <h2 className='text-4xl  text-center'>Sign In</h2>
@@ -48,8 +66,8 @@ const SignIn = () => {
         </div>
         <Form
           inputs={inputs}
-          submitButtonLabel='Login'
-          handleSubmit={handleLogin}
+          submitButtonLabel='Sign In'
+          handleSubmit={handleSubmit(handleLogin)}
         />
       </div>
     </div>

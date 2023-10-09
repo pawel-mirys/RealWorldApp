@@ -1,5 +1,5 @@
 import { Avatar, Button } from '@mui/material';
-import { useFetchUserQuery } from '../../../store';
+import { useFetchProfileQuery } from '../../../store';
 import AddIcon from '@mui/icons-material/Add';
 
 type ProfileHeaderProps = {
@@ -7,7 +7,7 @@ type ProfileHeaderProps = {
 };
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
-  const { data, isLoading, error } = useFetchUserQuery(username || '', {
+  const { data, isLoading, error } = useFetchProfileQuery(username || '', {
     refetchOnMountOrArgChange: false,
   });
   const profileData = data?.profile;

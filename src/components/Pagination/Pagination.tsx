@@ -13,7 +13,7 @@ const PaginationBar = () => {
   const articlesPerPage = 10;
   const totalPages = Math.ceil(articlesCount / articlesPerPage);
 
-  const handleChangePage = (e: React.ChangeEvent<unknown>, value: number) => {
+  const handleChangePage = (_e: React.ChangeEvent<unknown>, value: number) => {
     const offset = value * 10 - 10;
     dispatch(updateCurrentPage(offset));
   };

@@ -14,7 +14,6 @@ const FormInput: React.FC<ControlledInputProps> = ({
   control,
   name,
   label,
-  type,
   className,
   ...props
 }) => {
@@ -27,17 +26,17 @@ const FormInput: React.FC<ControlledInputProps> = ({
       name={name}
       render={({ field: { ref, ...field }, fieldState: { error } }) => (
         <TextField
+          {...props}
           ref={ref}
           onChange={field.onChange}
-          type={type}
           variant='outlined'
           id='outlined-basic'
+          aria-autocomplete='list'
           label={label}
           name={name}
           error={!!error}
           helperText={error?.message}
           className={className}
-          {...props}
         />
       )}
     />
