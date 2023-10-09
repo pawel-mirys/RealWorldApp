@@ -8,12 +8,14 @@ import popularTagSlice from './slices/tagSlice.ts';
 import paginationSlice from './slices/paginationSlice.ts';
 import { userApi } from './apis/userApi.ts';
 import { authSlice } from './slices/authSlice.ts';
+import currentUserSlice from './slices/currentUserSlice.ts';
 
 const store = configureStore({
   reducer: {
     popularTagState: popularTagSlice.reducer,
     currentPageState: paginationSlice.reducer,
     tokenState: authSlice.reducer,
+    currentUserState: currentUserSlice.reducer,
     [articlesApi.reducerPath]: articlesApi.reducer,
     [profilesApi.reducerPath]: profilesApi.reducer,
     [tagsApi.reducerPath]: tagsApi.reducer,
@@ -56,5 +58,7 @@ export const { updateTagState } = popularTagSlice.actions;
 export const { updateCurrentPage } = paginationSlice.actions;
 
 export const { setToken, resetToken } = authSlice.actions;
+
+export const { updateUserData, resetUserData } = currentUserSlice.actions;
 
 export { store, useAppDispatch, useAppSelector };

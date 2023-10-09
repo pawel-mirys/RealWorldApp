@@ -3,7 +3,11 @@ import Form from '../../components/Form/Form';
 import FormInput from '../../components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useLoginUserMutation } from '../../store';
+import {
+  updateUserData,
+  useAppDispatch,
+  useLoginUserMutation,
+} from '../../store';
 
 import { setToken } from '../../store';
 import { useCallback, useEffect } from 'react';
@@ -17,6 +21,7 @@ const SignIn = () => {
   const { control, handleSubmit } = useForm<Inputs>();
   const navigate = useNavigate();
   const [loginUser, { isSuccess, data }] = useLoginUserMutation();
+
   const dispatch = useAppDispatch();
 
   const inputs = (
@@ -37,9 +42,10 @@ const SignIn = () => {
     </div>
   );
 
-  const updateToken = useCallback(() => {
+  const updateData = useCallback(() => {
     if (isSuccess) {
       data && dispatch(setToken(data?.user.token));
+      data && dispatch(updateUserData(data.user));
       navigate('/');
     }
   }, [isSuccess, data, dispatch, navigate]);
@@ -49,8 +55,8 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    updateToken();
-  }, [data, updateToken]);
+    updateData();
+  }, [data, updateData]);
 
   return (
     <div className='flex justify-center h-screen'>

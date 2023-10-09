@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import Home from '../pages/Home/Home';
 import Login from '../pages/SignIn/SignIn';
@@ -10,20 +10,18 @@ import useAuthStatus from '../hooks/useAuthStatus';
 const RouterSwitch = () => {
   const isLoggedIn = useAuthStatus();
 
-  const renderOrRedirect = (component: JSX.Element) => {
-    if (isLoggedIn) {
-      return <Home />;
-    } else {
-      return component;
-    }
-  };
-
   return (
     <Routes>
       <Route path='/article/:slug' element={<ArticleShow />} />
       <Route path='/profiles/:username' element={<Profile />} />
-      <Route path='/signin' element={renderOrRedirect(<Login />)} />
-      <Route path='/signup' element={renderOrRedirect(<SignUp />)} />
+      <Route
+        path='/signin'
+        element={isLoggedIn ? <Navigate to={'/'} /> : <Login />}
+      />
+      <Route
+        path='/signup'
+        element={isLoggedIn ? <Navigate to={'/'} /> : <SignUp />}
+      />
       <Route path='/' element={<Home />} />
     </Routes>
   );

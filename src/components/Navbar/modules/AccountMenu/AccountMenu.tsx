@@ -11,12 +11,18 @@ import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Button } from '@mui/material';
-import { resetToken, useAppDispatch } from '../../../../store';
+import {
+  resetToken,
+  resetUserData,
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../store';
 
 const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const dispatch = useAppDispatch();
+  const userData = useAppSelector((state) => state.currentUserState);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -27,6 +33,7 @@ const AccountMenu = () => {
 
   const handleLogOut = () => {
     dispatch(resetToken());
+    dispatch(resetUserData());
   };
 
   return (
@@ -44,7 +51,7 @@ const AccountMenu = () => {
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}>
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }} src={userData.image} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -83,7 +90,7 @@ const AccountMenu = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
         <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+          <Avatar src={userData.image} /> {userData.username}
         </MenuItem>
         <Divider />
 

@@ -14,7 +14,6 @@ import PaginationBar from '../../components/Pagination/Pagination';
 
 const Home = () => {
   const page = useAppSelector((state) => state.currentPageState);
-
   const { data, isFetching, error } = useFetchArticlesQuery(page.offset);
   const tagState = useAppSelector((state) => state.popularTagState);
   const dispatch = useAppDispatch();
