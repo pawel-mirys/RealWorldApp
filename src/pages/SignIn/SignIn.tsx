@@ -3,10 +3,7 @@ import Form from '../../components/Form/Form';
 import FormInput from '../../components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import {
-  useAppDispatch,
-  useLoginUserMutation,
-} from '../../store';
+import { useAppDispatch, useLoginUserMutation } from '../../store';
 
 import { setToken } from '../../store';
 import { useCallback, useEffect } from 'react';
@@ -20,11 +17,10 @@ const SignIn = () => {
   const { control, handleSubmit } = useForm<Inputs>();
   const navigate = useNavigate();
   const [loginUser, { isSuccess, data }] = useLoginUserMutation();
-
   const dispatch = useAppDispatch();
 
   const inputs = (
-    <div className='flex flex-col justify-end'>
+    <div className='flex flex-col justify-end w-full'>
       <FormInput
         type='email'
         control={control}
@@ -58,7 +54,7 @@ const SignIn = () => {
 
   return (
     <div className='flex justify-center h-screen'>
-      <div className='flex  flex-col items-center gap-5 mt-10'>
+      <div className='flex  flex-col items-center gap-5 mt-10 w-2/6'>
         <div className='flex flex-col gap-2'>
           <h2 className='text-4xl  text-center'>Sign In</h2>
           <Button
@@ -68,6 +64,7 @@ const SignIn = () => {
             Need an account?
           </Button>
         </div>
+
         <Form
           inputs={inputs}
           submitButtonLabel='Sign In'

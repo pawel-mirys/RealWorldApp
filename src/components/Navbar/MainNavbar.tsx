@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import useAuthStatus from '../../hooks/useAuthStatus';
-import AccountMenu from './modules/AccountMenu/AccountMenu';
+import AccountMenu from '../AccountMenu/AccountMenu';
 
 const MainNavbar = () => {
   const navigate = useNavigate();

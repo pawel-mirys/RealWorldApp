@@ -50,7 +50,15 @@ export type User = {
   email: string;
   token: string;
   username: string;
-  bio: string;
+  bio: string | null;
+  image: string;
+};
+
+export type UpdateUserData = {
+  email: string;
+  password: string | null;
+  username: string;
+  bio: string | null;
   image: string;
 };
 

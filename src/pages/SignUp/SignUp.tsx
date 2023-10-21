@@ -33,7 +33,7 @@ const SignUp = () => {
 
   return (
     <div className='flex justify-center h-screen'>
-      <div className='flex  flex-col items-center gap-5 mt-10'>
+      <div className='flex  flex-col items-center gap-5 mt-10 w-2/6'>
         <div className='flex flex-col gap-2'>
           <h2 className='text-4xl  text-center'>Sign Up</h2>
           <Button

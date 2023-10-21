@@ -16,12 +16,14 @@ import {
   resetUserData,
   useAppDispatch,
   useAppSelector,
-} from '../../../../store';
+} from '../../store';
+import { useNavigate } from 'react-router-dom';
 
 const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const userData = useAppSelector((state) => state.currentUserState);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -97,7 +99,11 @@ const AccountMenu = () => {
         </MenuItem>
         <Divider />
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleClose;
+            navigate('/settings');
+          }}>
           <ListItemIcon>
             <Settings fontSize='small' />
           </ListItemIcon>

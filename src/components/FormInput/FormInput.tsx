@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TextField } from '@mui/material';
-import { Controller } from 'react-hook-form';
+import { TextField, TextFieldProps } from '@mui/material';
+import {
+  Controller,
+  FieldPath,
+  FieldPathValue,
+  FieldValues,
+} from 'react-hook-form';
 
 type ControlledInputProps = {
   control: any;
@@ -8,30 +13,37 @@ type ControlledInputProps = {
   label: string;
   type: string;
   className?: string;
-};
+  validate?: (
+    value: FieldPathValue<FieldValues, FieldPath<FieldValues>>
+  ) => string | undefined;
+} & TextFieldProps;
 
 const FormInput: React.FC<ControlledInputProps> = ({
   control,
   name,
   label,
   className,
+  validate,
   ...props
 }) => {
   return (
     <Controller
       control={control}
-      rules={{
-        required: `${name} is required`,
-      }}
       name={name}
+      rules={{validate}}
       render={({ field: { ref, ...field }, fieldState: { error } }) => (
         <TextField
           {...props}
-          ref={ref}
           onChange={field.onChange}
+          ref={ref}
           variant='outlined'
           id='outlined-basic'
           aria-autocomplete='list'
+          sx={{
+            '& .MuiInputBase-root': {
+              width: '100%',
+            },
+          }}
           label={label}
           name={name}
           error={!!error}

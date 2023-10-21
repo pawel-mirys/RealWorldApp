@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { User, UserLogin } from '../../types';
+import { UpdateUserData, User, UserLogin } from '../../types';
 
 const URL = 'https://api.realworld.io/api';
 
@@ -31,6 +31,30 @@ const userApi = createApi({
             headers: {
               accept: 'application/json',
               Authorization: `Token ${token}`,
+            },
+          };
+        },
+      }),
+      updateCurrentUserSettings: builder.mutation<
+        { user: UpdateUserData },
+        { token: string | null; user: UpdateUserData }
+      >({
+        query: ({ token, user }) => {
+          return {
+            url: '/user',
+            method: 'PUT',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+            body: {
+              user: {
+                email: user.email,
+                password: user.password,
+                username: user.username,
+                bio: user.bio,
+                image: user.image,
+              },
             },
           };
         },
