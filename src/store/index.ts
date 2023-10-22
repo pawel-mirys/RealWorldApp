@@ -54,6 +54,7 @@ export { useFetchPopularTagsQuery } from './apis/tagsApi.ts';
 export {
   useLoginUserMutation,
   useGetCurrentUserDataQuery,
+  useUpdateCurrentUserSettingsMutation,
 } from './apis/userApi.ts';
 
 export const { updateTagState } = popularTagSlice.actions;

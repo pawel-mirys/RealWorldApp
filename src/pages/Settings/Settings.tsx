@@ -3,12 +3,16 @@ import clsx from 'clsx';
 import Form from '../../components/Form/Form';
 import FormInput from '../../components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
-import { useAppSelector } from '../../store';
+import {
+  useAppSelector,
+  useUpdateCurrentUserSettingsMutation,
+} from '../../store';
 import { UpdateUserData } from '../../types';
 import { useEffect, useState } from 'react';
 import SettingsOverview from './modules/SettingsOverview';
 import { Button } from '@mui/material';
 import AlertDialog from '../../components/AlertDialog/AlertDialog';
+import { useNavigate } from 'react-router-dom';
 
 type SettingsInputs = {
   image: string;
@@ -54,10 +58,10 @@ const fieldsConfig: FieldConfig[] = [
 ];
 
 const Settings = () => {
+  const [updateUser, { isSuccess }] = useUpdateCurrentUserSettingsMutation();
   const currentUserData = useAppSelector((state) => state.currentUserState);
   const [isEditable, setIsEditable] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-
   const [userData, setUserData] = useState<UpdateUserData>({
     email: '',
     image: '',
@@ -66,14 +70,14 @@ const Settings = () => {
     bio: '',
   });
 
-  const { control, handleSubmit, setValue, formState, reset } =
-    useForm<SettingsInputs>({});
+  const { control, handleSubmit, setValue, formState, reset, setError } =
+    useForm<SettingsInputs>();
 
   useEffect(() => {
     setUserData({
       ...currentUserData,
       bio: currentUserData.bio || null,
-      password: null ?? '',
+      password: null,
     });
   }, [currentUserData]);
 
@@ -91,8 +95,28 @@ const Settings = () => {
     }
   };
 
+  const handleUpdateData = (inputsData: SettingsInputs) => {
+    updateUser({ token: currentUserData.token, user: inputsData })
+      .unwrap()
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        setError('root', { type: 'custom', message: error });
+      });
+  };
+
+  useEffect(() => {
+    console.log(isSuccess);
+  }, [isSuccess]);
+
   const handleSubmitSettings = (inputsData: SettingsInputs) => {
-    console.log(inputsData);
+    formState.isDirty
+      ? handleUpdateData(inputsData)
+      : setError('root', {
+          type: 'custom',
+          message: 'At least one field is required.',
+        });
   };
 
   const settingsInputs = fieldsConfig.map((field) => (
@@ -114,17 +138,23 @@ const Settings = () => {
         'flex flex-col items-center w-full h-screen'
       )}>
       <h1 className='text-4xl text-center mt-5'>User Settings</h1>
-      <div className='w-2/6'>
+      <div className='flex flex-col gap-3 w-2/6'>
         {isEditable && (
           <>
             <Form
               handleSubmit={handleSubmit(handleSubmitSettings)}
               inputs={settingsInputs}
             />
+            {formState.errors && (
+              <span className='text-red-600'>
+                {formState.errors.root?.message}
+              </span>
+            )}
             <Button
               onClick={handleEditSettings}
               variant='contained'
-              color='warning'>
+              color='warning'
+              className='w-full'>
               Cancel
             </Button>
           </>
