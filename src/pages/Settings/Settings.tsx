@@ -114,7 +114,6 @@ const Settings = () => {
         'flex flex-col items-center w-full h-screen'
       )}>
       <h1 className='text-4xl text-center mt-5'>User Settings</h1>
-
       <div className='w-2/6'>
         {isEditable && (
           <>
