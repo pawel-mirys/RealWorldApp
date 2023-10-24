@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { UpdateUserData, User, UserLogin } from '../../types';
+import { UpdateUserData, User, UserLogin, UserRegister } from '../../types';
 
 const URL = 'https://api.realworld.io/api';
 
@@ -16,6 +16,21 @@ const userApi = createApi({
             method: 'POST',
             body: {
               user: {
+                email: user.email,
+                password: user.password,
+              },
+            },
+          };
+        },
+      }),
+      registerUser: builder.mutation<{ userData: User }, UserRegister>({
+        query: (user: UserRegister) => {
+          return {
+            url: '/users',
+            method: 'POST',
+            body: {
+              user: {
+                username: user.name,
                 email: user.email,
                 password: user.password,
               },
@@ -67,5 +82,6 @@ export const {
   useLoginUserMutation,
   useGetCurrentUserDataQuery,
   useUpdateCurrentUserSettingsMutation,
+  useRegisterUserMutation,
 } = userApi;
 export { userApi };

@@ -3,6 +3,7 @@ import Form from '../../components/Form/Form';
 import FormInput from '../../components/FormInput/FormInput';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useRegisterUserMutation } from '../../store';
 
 type Inputs = {
   name: string;
@@ -11,11 +12,23 @@ type Inputs = {
 };
 
 const SignUp = () => {
-  const { control, handleSubmit } = useForm<Inputs>();
+  const { control, handleSubmit, setError, getValues } = useForm<Inputs>();
+  const [registerUser, isSuccess] = useRegisterUserMutation();
   const navigate = useNavigate();
 
   const handleSignUp = (data: Inputs) => {
-    console.log(data);
+    if (!getValues().email) {
+      setError('email', { message: 'Email is required' });
+    }
+    if (!getValues().name) {
+      setError('name', { message: 'Name is required' });
+    }
+    if (!getValues().password) {
+      setError('password', { message: 'Password is required' });
+    } else {
+      registerUser(data);
+      isSuccess && navigate('/signin');
+    }
   };
 
   const inputs = (

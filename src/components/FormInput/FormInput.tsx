@@ -30,7 +30,7 @@ const FormInput: React.FC<ControlledInputProps> = ({
     <Controller
       control={control}
       name={name}
-      rules={{validate}}
+      rules={{ validate }}
       render={({ field: { ref, ...field }, fieldState: { error } }) => (
         <TextField
           {...props}

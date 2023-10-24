@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react';
 import SettingsOverview from './modules/SettingsOverview';
 import { Button } from '@mui/material';
 import AlertDialog from '../../components/AlertDialog/AlertDialog';
-import { useNavigate } from 'react-router-dom';
 
 type SettingsInputs = {
   image: string;
@@ -58,7 +57,7 @@ const fieldsConfig: FieldConfig[] = [
 ];
 
 const Settings = () => {
-  const [updateUser, { isSuccess }] = useUpdateCurrentUserSettingsMutation();
+  const [updateUser] = useUpdateCurrentUserSettingsMutation();
   const currentUserData = useAppSelector((state) => state.currentUserState);
   const [isEditable, setIsEditable] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -105,10 +104,6 @@ const Settings = () => {
         setError('root', { type: 'custom', message: error });
       });
   };
-
-  useEffect(() => {
-    console.log(isSuccess);
-  }, [isSuccess]);
 
   const handleSubmitSettings = (inputsData: SettingsInputs) => {
     formState.isDirty

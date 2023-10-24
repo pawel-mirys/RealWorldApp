@@ -55,6 +55,7 @@ export {
   useLoginUserMutation,
   useGetCurrentUserDataQuery,
   useUpdateCurrentUserSettingsMutation,
+  useRegisterUserMutation,
 } from './apis/userApi.ts';
 
 export const { updateTagState } = popularTagSlice.actions;

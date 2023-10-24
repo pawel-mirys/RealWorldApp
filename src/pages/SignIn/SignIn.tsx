@@ -4,7 +4,6 @@ import FormInput from '../../components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useLoginUserMutation } from '../../store';
-
 import { setToken } from '../../store';
 import { useCallback, useEffect } from 'react';
 
@@ -14,20 +13,14 @@ type Inputs = {
 };
 
 const SignIn = () => {
-  const { control, handleSubmit } = useForm<Inputs>();
+  const { control, handleSubmit, getValues, setError } = useForm<Inputs>();
   const navigate = useNavigate();
   const [loginUser, { isSuccess, data }] = useLoginUserMutation();
   const dispatch = useAppDispatch();
 
   const inputs = (
     <div className='flex flex-col justify-end w-full'>
-      <FormInput
-        type='email'
-        control={control}
-        name='email'
-        label='Email'
-        className=''
-      />
+      <FormInput type='email' control={control} name='email' label='Email' />
       <FormInput
         type='password'
         control={control}
@@ -45,7 +38,13 @@ const SignIn = () => {
   }, [isSuccess, data, dispatch, navigate]);
 
   const handleLogin = (inputsData: Inputs) => {
-    loginUser(inputsData);
+    if (!getValues().email) {
+      setError('email', { message: 'Email is required' });
+    } else if (!getValues().password) {
+      setError('password', { message: 'Password is required' });
+    } else {
+      loginUser(inputsData);
+    }
   };
 
   useEffect(() => {
