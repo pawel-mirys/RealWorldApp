@@ -1,14 +1,18 @@
 import React from 'react';
 import clsx from 'clsx';
 import ArticleComment from '../../../components/ArticleComment/ArticleComment';
-import { useFetchArticleCommentsQuery } from '../../../store';
+import { useAppSelector, useFetchArticleCommentsQuery } from '../../../store';
 
 type ArticleShowCommentsProps = {
   slug: string;
 };
 
 const ArticleShowComments: React.FC<ArticleShowCommentsProps> = ({ slug }) => {
-  const { data, isFetching, error } = useFetchArticleCommentsQuery(slug);
+  const currentUserData = useAppSelector((state) => state.currentUserState);
+  const { data, isFetching, error } = useFetchArticleCommentsQuery({
+    slug: slug,
+    token: currentUserData.token,
+  });
 
   if (isFetching) {
     return <div>Loading comments...</div>;

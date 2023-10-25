@@ -5,7 +5,7 @@ const URL = 'https://api.realworld.io/api';
 
 const profilesApi = createApi({
   reducerPath: 'profile',
-  tagTypes: ['Porifle'],
+  tagTypes: ['Profile'],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints(builder) {
     return {

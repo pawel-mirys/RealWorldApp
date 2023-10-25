@@ -25,6 +25,10 @@ export type Comment = {
   author: Author;
 };
 
+export type CreateComment = {
+  body: string;
+};
+
 export type FetchedCommentData = {
   comments: Comment[];
 };

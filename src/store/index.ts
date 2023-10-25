@@ -9,6 +9,7 @@ import paginationSlice from './slices/paginationSlice.ts';
 import { userApi } from './apis/userApi.ts';
 import { authSlice } from './slices/authSlice.ts';
 import currentUserSlice from './slices/currentUserSlice.ts';
+import { commentsApi } from './apis/commentsApi.ts';
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     [profilesApi.reducerPath]: profilesApi.reducer,
     [tagsApi.reducerPath]: tagsApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [commentsApi.reducerPath]: commentsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return [
@@ -28,6 +30,7 @@ const store = configureStore({
       profilesApi.middleware,
       tagsApi.middleware,
       userApi.middleware,
+      commentsApi.middleware,
     ];
   },
 });
@@ -44,7 +47,6 @@ export {
   useFetchArticlesByTagQuery,
   useFetchArticlesBySlugQuery,
   useFetchArticlesCountQuery,
-  useFetchArticleCommentsQuery,
 } from './apis/articleApi.ts';
 
 export { useFetchProfileQuery } from './apis/profilesApi.ts';
@@ -57,6 +59,11 @@ export {
   useUpdateCurrentUserSettingsMutation,
   useRegisterUserMutation,
 } from './apis/userApi.ts';
+
+export {
+  useFetchArticleCommentsQuery,
+  useCreateCommentMutation,
+} from './apis/commentsApi.ts';
 
 export const { updateTagState } = popularTagSlice.actions;
 

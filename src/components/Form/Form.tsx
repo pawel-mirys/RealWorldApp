@@ -22,7 +22,7 @@ const Form: React.FC<FormProps> = ({
       component='form'
       sx={{
         width: '100%',
-        '& .MuiTextField-root': { mt: 2, mb: 2, width: '100%' },
+        '& .MuiTextField-root': { mb: 2, width: '100%' },
       }}
       noValidate={false}
       autoComplete='on'

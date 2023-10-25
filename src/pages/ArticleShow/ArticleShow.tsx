@@ -42,7 +42,7 @@ const ArticleShow: React.FC = () => {
             disabled
           />
         </div>
-        <ArticleShowFooter />
+        <ArticleShowFooter slug={data.article.slug}/>
         <Button
           variant='contained'
           size='small'
