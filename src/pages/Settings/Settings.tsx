@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
 import clsx from 'clsx';
-import Form from '../../components/Form/Form';
-import FormInput from '../../components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import {
   useAppSelector,
   useUpdateCurrentUserSettingsMutation,
 } from '../../store';
 import { UpdateUserData } from '../../types';
-import { useEffect, useState } from 'react';
 import SettingsOverview from './modules/SettingsOverview';
-import { Button } from '@mui/material';
 import AlertDialog from '../../components/AlertDialog/AlertDialog';
+import Form from '../../components/Form/Form';
+import FormInput from '../../components/FormInput/FormInput';
 
 type SettingsInputs = {
   image: string;
@@ -134,7 +133,7 @@ const Settings = () => {
       )}>
       <h1 className='text-4xl text-center mt-5'>User Settings</h1>
       <div className='flex flex-col gap-3 w-2/6'>
-        {isEditable && (
+        {isEditable ? (
           <>
             <Form
               handleSubmit={handleSubmit(handleSubmitSettings)}
@@ -153,8 +152,7 @@ const Settings = () => {
               Cancel
             </Button>
           </>
-        )}
-        {!isEditable && (
+        ) : (
           <SettingsOverview userData={userData} onClick={handleEditSettings} />
         )}
       </div>

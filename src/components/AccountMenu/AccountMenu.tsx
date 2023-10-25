@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -62,7 +62,6 @@ const AccountMenu = () => {
         id='account-menu'
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -91,18 +90,14 @@ const AccountMenu = () => {
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-        <MenuItem
-          onClick={() => {
-            handleClose;
-          }}>
+        <MenuItem>
           <Avatar src={userData.image} /> {userData.username}
         </MenuItem>
         <Divider />
-
         <MenuItem
           onClick={() => {
-            handleClose;
             navigate('/settings');
+            handleClose();
           }}>
           <ListItemIcon>
             <Settings fontSize='small' />
@@ -111,8 +106,8 @@ const AccountMenu = () => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            handleClose;
             handleLogOut();
+            handleClose();
           }}>
           <ListItemIcon>
             <Logout fontSize='small' />

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from '@mui/material';
 import ArticlesList from '../../components/ArticlesList/ArticlesList';
 import FilteredArticlesList from '../../components/FilteredArticlesList/FilteredArticlesList';
@@ -18,13 +19,12 @@ const Home = () => {
   const tagState = useAppSelector((state) => state.popularTagState);
   const dispatch = useAppDispatch();
 
-  let list;
-
-  if (tagState.tag === '') {
-    list = <ArticlesList data={data} isFetching={isFetching} error={error} />;
-  } else {
-    list = <FilteredArticlesList />;
-  }
+  const list =
+    tagState.tag === '' ? (
+      <ArticlesList data={data} isFetching={isFetching} error={error} />
+    ) : (
+      <FilteredArticlesList />
+    );
 
   const handleResetTag = () => {
     dispatch(updateTagState(''));

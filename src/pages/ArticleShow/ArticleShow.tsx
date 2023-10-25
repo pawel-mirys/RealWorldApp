@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, Skeleton } from '@mui/material';
 import { useFetchArticlesBySlugQuery } from '../../store';
@@ -10,56 +11,51 @@ import ArticleShowComments from './modules/ArticleShowComments';
 const ArticleShow: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data, isFetching, error } = useFetchArticlesBySlugQuery(slug!);
-
   const navigate = useNavigate();
 
-  let content;
-
   if (isFetching) {
-    content = (
-      <>
-        <Skeleton animation='wave' height={'300px'} />;
-      </>
-    );
-  } else if (error) {
-    content = <div>Error while fetching data...</div>;
-  } else if (data) {
-    const article = data?.article;
-
-    content = (
-      <Box>
-        <div className={clsx('article-show', 'flex flex-col gap-7 ')}>
-          <ArticleShowHeader article={article} />
-          <>
-            <div className={clsx('content', 'w-4/6 m-auto text-lg')}>
-              <p>{article.body}</p>
-            </div>
-            <div className={clsx('tags', 'w-4/6 m-auto')}>
-              <TagsList
-                data={article.tagList}
-                isLoading={isFetching}
-                error={error}
-                disabled
-              />
-            </div>
-            <ArticleShowFooter />
-            <Button
-              variant='contained'
-              size='small'
-              sx={{ position: 'sticky', top: 60 }}
-              onClick={() => {
-                navigate(-1);
-              }}>
-              back
-            </Button>
-            <ArticleShowComments slug={slug || ''} />
-          </>
-        </div>
-      </Box>
-    );
+    return <Skeleton animation='wave' height={'300px'} />;
   }
 
-  return content;
+  if (error) {
+    return <div>Error while fetching data...</div>;
+  }
+
+  if (!data) {
+    return null;
+  }
+
+  const { article } = data;
+
+  return (
+    <Box>
+      <div className={clsx('article-show', 'flex flex-col gap-7 ')}>
+        <ArticleShowHeader article={article} />
+        <div className={clsx('content', 'w-4/6 m-auto text-lg')}>
+          <p>{article.body}</p>
+        </div>
+        <div className={clsx('tags', 'w-4/6 m-auto')}>
+          <TagsList
+            data={article.tagList}
+            isLoading={isFetching}
+            error={error}
+            disabled
+          />
+        </div>
+        <ArticleShowFooter />
+        <Button
+          variant='contained'
+          size='small'
+          sx={{ position: 'sticky', top: 60 }}
+          onClick={() => {
+            navigate(-1);
+          }}>
+          back
+        </Button>
+        <ArticleShowComments slug={slug || ''} />
+      </div>
+    </Box>
+  );
 };
 
 export default ArticleShow;

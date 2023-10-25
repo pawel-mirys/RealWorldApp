@@ -1,15 +1,13 @@
-import clsx from 'clsx';
-import styles from './ArticleList.module.scss';
-import { ArticleData, FetchedArticlesData } from '../../types';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
-import { SerializedError } from '@reduxjs/toolkit';
-import Article from '../Article/Article';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
 import { Skeleton } from '@mui/material';
+import Article from '../Article/Article';
+import { ArticleData, FetchedArticlesData } from '../../types';
 
 type ArticleListProps = {
   data: FetchedArticlesData | undefined;
   isFetching: boolean;
-  error: FetchBaseQueryError | SerializedError | undefined;
+  error: any;
 };
 
 const ArticlesList: React.FC<ArticleListProps> = ({
@@ -20,30 +18,20 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   let content;
 
   if (isFetching) {
-    const skeletons: JSX.Element[] = [];
-    for (let i = 0; i <= 10; i++) {
-      skeletons.push(<Skeleton animation='wave' key={i} height={'150px'} />);
-    }
+    const skeletons = Array.from({ length: 10 }, (_, i) => (
+      <Skeleton animation='wave' key={i} height={'150px'} />
+    ));
     content = skeletons;
   } else if (error) {
     content = <div>Error while fetching articles...</div>;
   } else {
-    content = data?.articles.map((article: ArticleData) => {
-      return (
-        <Article key={`${article.slug}${Math.random()}`} article={article} />
-      );
-    });
+    content = data?.articles.map((article: ArticleData) => (
+      <Article key={article.slug} article={article} />
+    ));
   }
 
   return (
-    <div
-      className={clsx(
-        styles.articleList,
-        'article-list',
-        'flex flex-col flex-auto gap-5 '
-      )}>
-      {content}
-    </div>
+    <div className='article-list flex flex-col flex-auto gap-5'>{content}</div>
   );
 };
 

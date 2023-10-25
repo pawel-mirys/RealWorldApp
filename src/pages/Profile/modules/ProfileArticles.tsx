@@ -1,11 +1,14 @@
+import React from 'react';
 import ArticlesList from '../../../components/ArticlesList/ArticlesList';
 import { useFetchProfileArticlesQuery } from '../../../store';
 
-type ProfileArticlesList = {
+type ProfileArticlesListProps = {
   username: string;
 };
 
-const ProfileArticlesList: React.FC<ProfileArticlesList> = ({ username }) => {
+const ProfileArticlesList: React.FC<ProfileArticlesListProps> = ({
+  username,
+}) => {
   const { data, isFetching, error } = useFetchProfileArticlesQuery(username);
 
   return (

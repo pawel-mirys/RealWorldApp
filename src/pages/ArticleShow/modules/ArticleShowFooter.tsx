@@ -1,22 +1,20 @@
+import React from 'react';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 
-const ArticleShowFooter = () => {
+const ArticleShowFooter: React.FC = () => {
   const navigate = useNavigate();
+
   return (
     <div className={clsx('article-footer', 'w-auto m-auto')}>
       <span
-        onClick={() => {
-          navigate('/signin');
-        }}
+        onClick={() => navigate('/signin')}
         className='text-blue-600 cursor-pointer mr-1'>
         Sign In
       </span>
       or
       <span
-        onClick={() => {
-          navigate('/signup');
-        }}
+        onClick={() => navigate('/signup')}
         className='text-blue-600 cursor-pointer m-1'>
         Sign Up
       </span>
