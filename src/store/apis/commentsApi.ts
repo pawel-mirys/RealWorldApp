@@ -46,10 +46,31 @@ const commentsApi = createApi({
           };
         },
       }),
+      deleteComment: builder.mutation<
+        object,
+        { slug: string; commentId: number; token: string }
+      >({
+        invalidatesTags: () => {
+          return [{ type: 'Comments' }];
+        },
+        query: ({ slug, commentId, token }) => {
+          return {
+            url: `/articles/${slug}/comments/${commentId}`,
+            method: 'DELETE',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useFetchArticleCommentsQuery, useCreateCommentMutation } =
-  commentsApi;
+export const {
+  useFetchArticleCommentsQuery,
+  useCreateCommentMutation,
+  useDeleteCommentMutation,
+} = commentsApi;
 export { commentsApi };

@@ -63,6 +63,7 @@ export {
 export {
   useFetchArticleCommentsQuery,
   useCreateCommentMutation,
+  useDeleteCommentMutation,
 } from './apis/commentsApi.ts';
 
 export const { updateTagState } = popularTagSlice.actions;

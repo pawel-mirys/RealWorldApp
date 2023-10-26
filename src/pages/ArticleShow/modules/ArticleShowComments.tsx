@@ -29,7 +29,7 @@ const ArticleShowComments: React.FC<ArticleShowCommentsProps> = ({ slug }) => {
   return (
     <div className={clsx('comments', 'flex flex-col w-2/5 m-auto')}>
       {data?.comments.map((comment) => (
-        <ArticleComment key={comment.id} data={comment} />
+        <ArticleComment key={comment.id} slug={slug} data={comment} />
       ))}
     </div>
   );
