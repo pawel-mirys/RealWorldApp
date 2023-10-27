@@ -6,12 +6,14 @@ import { Button, ButtonGroup } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useAppSelector } from '../../../store';
 
 type ArticleShowHeaderProps = {
   article: ArticleData;
 };
 
 const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({ article }) => {
+  const currentUserData = useAppSelector((state) => state.currentUserState);
   return (
     <header
       className={clsx(
@@ -24,9 +26,11 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({ article }) => {
       <div className='flex flex-row items-center gap-10 w-4/6 m-auto'>
         <Author authorData={article.author} createdAt={article.createdAt} />
         <ButtonGroup>
-          <Button>
-            <AddIcon /> Follow {article.author.username}
-          </Button>
+          {article.author.username !== currentUserData.username && (
+            <Button>
+              <AddIcon /> Follow {article.author.username}
+            </Button>
+          )}
           <Button>
             {article.favourtied ? <FavoriteIcon /> : <FavoriteBorderIcon />}
             Like Article {`(${article.favoritesCount})`}

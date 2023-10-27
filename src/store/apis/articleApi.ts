@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { ArticleData, Author, FetchedArticlesData } from '../../types';
+import { ArticleData, FetchedArticlesData } from '../../types';
 
 const URL = 'https://api.realworld.io/api';
 
@@ -37,12 +37,16 @@ const articlesApi = createApi({
 
       fetchProfileArticles: builder.query<
         FetchedArticlesData,
-        Author['username']
+        { author: string; token?: string }
       >({
-        query: (author: Author['username']) => {
+        query: ({ author, token }) => {
           return {
             url: `/articles?author=${author}`,
             method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
           };
         },
       }),

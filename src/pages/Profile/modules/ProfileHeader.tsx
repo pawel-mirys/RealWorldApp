@@ -2,12 +2,17 @@ import React from 'react';
 import { Avatar, Button } from '@mui/material';
 import { useFetchProfileQuery } from '../../../store';
 import AddIcon from '@mui/icons-material/Add';
+import { User } from '../../../types';
 
 type ProfileHeaderProps = {
   username: string;
+  currentUser: User;
 };
 
-const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
+const ProfileHeader: React.FC<ProfileHeaderProps> = ({
+  username,
+  currentUser,
+}) => {
   const { data, isLoading, error } = useFetchProfileQuery(username || '', {
     refetchOnMountOrArgChange: false,
   });
@@ -36,9 +41,11 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
             {profileData?.bio}
           </div>
         )}
-        <Button sx={{ mt: '15px' }} variant='contained'>
-          <AddIcon /> Follow {profileData?.username}
-        </Button>
+        {profileData?.username !== currentUser.username && (
+          <Button sx={{ mt: '15px' }} variant='contained'>
+            <AddIcon /> Follow {profileData?.username}
+          </Button>
+        )}
       </header>
     );
   }

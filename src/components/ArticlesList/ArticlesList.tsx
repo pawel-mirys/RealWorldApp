@@ -31,7 +31,9 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   }
 
   return (
-    <div className='article-list flex flex-col flex-auto gap-5'>{content}</div>
+    <div className='article-list flex flex-col flex-auto gap-5 mt-5'>
+      {content}
+    </div>
   );
 };
 

@@ -38,11 +38,15 @@ const AccountMenu = () => {
     dispatch(resetUserData());
   };
 
+  const handleShowProfile = () => {
+    navigate(`/profiles/${userData.username}`);
+  };
+
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Button size='small' variant='text' color='inherit'>
-          New Article{' '}
+          New Article
           <CreateIcon sx={{ width: '15px', height: '15px', ml: '5px' }} />
         </Button>
         <Tooltip title='Account settings'>
@@ -90,7 +94,7 @@ const AccountMenu = () => {
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-        <MenuItem>
+        <MenuItem onClick={handleShowProfile}>
           <Avatar src={userData.image} /> {userData.username}
         </MenuItem>
         <Divider />
