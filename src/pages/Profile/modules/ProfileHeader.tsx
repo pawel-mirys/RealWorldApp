@@ -8,6 +8,8 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { User } from '../../../types';
+import useAuthStatus from '../../../hooks/useAuthStatus';
+import { useNavigate } from 'react-router-dom';
 
 type ProfileHeaderProps = {
   username: string;
@@ -22,9 +24,10 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
     userName: username,
     token: currentUser.token,
   });
+  const navigate = useNavigate();
   const [followProfile] = useFollowProfileMutation();
   const [unfollowProfile] = useUnfollowProfileMutation();
-
+  const isLoggedIn = useAuthStatus();
   const profileData = data?.profile;
 
   let content;
@@ -56,10 +59,12 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
                 sx={{ mt: '15px' }}
                 variant='outlined'
                 onClick={() => {
-                  followProfile({
-                    userName: profileData.username,
-                    token: currentUser.token,
-                  });
+                  !isLoggedIn
+                    ? navigate('/signin')
+                    : followProfile({
+                        userName: profileData.username,
+                        token: currentUser.token,
+                      });
                 }}>
                 <AddIcon /> Follow {profileData?.username}
               </Button>

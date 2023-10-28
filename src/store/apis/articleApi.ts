@@ -5,7 +5,7 @@ const URL = 'https://api.realworld.io/api';
 
 const articlesApi = createApi({
   reducerPath: 'articles',
-  tagTypes: ['Article'],
+  tagTypes: ['Article', 'Profile'],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints(builder) {
     return {
@@ -18,11 +18,19 @@ const articlesApi = createApi({
         },
       }),
 
-      fetchArticlesBySlug: builder.query<{ article: ArticleData }, string>({
-        query: (slug: string) => {
+      fetchArticlesBySlug: builder.query<
+        { article: ArticleData },
+        { slug: string; token: string }
+      >({
+        providesTags: [{ type: 'Profile' }],
+        query: ({ slug, token }) => {
           return {
             url: `/articles/${slug}`,
             method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
           };
         },
       }),
