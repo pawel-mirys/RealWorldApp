@@ -1,7 +1,12 @@
 import React from 'react';
 import { Avatar, Button } from '@mui/material';
-import { useFetchProfileQuery } from '../../../store';
+import {
+  useFetchProfileQuery,
+  useFollowProfileMutation,
+  useUnfollowProfileMutation,
+} from '../../../store';
 import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { User } from '../../../types';
 
 type ProfileHeaderProps = {
@@ -13,9 +18,12 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   username,
   currentUser,
 }) => {
-  const { data, isLoading, error } = useFetchProfileQuery(username || '', {
-    refetchOnMountOrArgChange: false,
+  const { data, isLoading, error } = useFetchProfileQuery({
+    userName: username,
+    token: currentUser.token,
   });
+  const [followProfile] = useFollowProfileMutation();
+  const [unfollowProfile] = useUnfollowProfileMutation();
 
   const profileData = data?.profile;
 
@@ -26,28 +34,51 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   } else if (error) {
     content = <div>Error while loading a profile</div>;
   } else {
-    content = (
-      <header className='flex flex-col items-center w-screen py-10 bg-zinc-700'>
-        <Avatar
-          sx={{ width: '100px', height: '100px' }}
-          alt={username}
-          src={profileData?.image}
-        />
-        <div className='text-gray-300 text-2xl font-bold mt-5'>
-          {profileData?.username}
-        </div>
-        {profileData?.bio && (
-          <div className='profile-bio w-5/6 text-gray-100 text-lg mt-3 text-center'>
-            {profileData?.bio}
+    if (profileData) {
+      content = (
+        <header className='flex flex-col items-center w-screen py-10 bg-zinc-700'>
+          <Avatar
+            sx={{ width: '100px', height: '100px' }}
+            alt={username}
+            src={profileData?.image}
+          />
+          <div className='text-gray-300 text-2xl font-bold mt-5'>
+            {profileData?.username}
           </div>
-        )}
-        {profileData?.username !== currentUser.username && (
-          <Button sx={{ mt: '15px' }} variant='contained'>
-            <AddIcon /> Follow {profileData?.username}
-          </Button>
-        )}
-      </header>
-    );
+          {profileData?.bio && (
+            <div className='profile-bio w-5/6 text-gray-100 text-lg mt-3 text-center'>
+              {profileData?.bio}
+            </div>
+          )}
+          {profileData?.username !== currentUser.username &&
+            (!profileData?.following ? (
+              <Button
+                sx={{ mt: '15px' }}
+                variant='outlined'
+                onClick={() => {
+                  followProfile({
+                    userName: profileData.username,
+                    token: currentUser.token,
+                  });
+                }}>
+                <AddIcon /> Follow {profileData?.username}
+              </Button>
+            ) : (
+              <Button
+                sx={{ mt: '15px' }}
+                variant='contained'
+                onClick={() => {
+                  unfollowProfile({
+                    userName: profileData.username,
+                    token: currentUser.token,
+                  });
+                }}>
+                <RemoveIcon /> Unfollow {profileData?.username}
+              </Button>
+            ))}
+        </header>
+      );
+    }
   }
 
   return content;

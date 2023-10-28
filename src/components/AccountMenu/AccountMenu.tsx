@@ -40,6 +40,7 @@ const AccountMenu = () => {
 
   const handleShowProfile = () => {
     navigate(`/profiles/${userData.username}`);
+    handleClose();
   };
 
   return (

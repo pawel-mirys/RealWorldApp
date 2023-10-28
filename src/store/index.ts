@@ -49,7 +49,11 @@ export {
   useFetchArticlesCountQuery,
 } from './apis/articleApi.ts';
 
-export { useFetchProfileQuery } from './apis/profilesApi.ts';
+export {
+  useFetchProfileQuery,
+  useFollowProfileMutation,
+  useUnfollowProfileMutation,
+} from './apis/profilesApi.ts';
 
 export { useFetchPopularTagsQuery } from './apis/tagsApi.ts';
 

@@ -26,7 +26,7 @@ export type Comment = {
 };
 
 export type CreateComment = {
-  body: string;
+  body: string | null;
 };
 
 export type FetchedCommentData = {

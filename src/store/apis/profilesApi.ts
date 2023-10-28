@@ -9,11 +9,55 @@ const profilesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints(builder) {
     return {
-      fetchProfile: builder.query<FetchedAuthorData, string>({
-        query: (userName: string) => {
+      fetchProfile: builder.query<
+        FetchedAuthorData,
+        { userName: string; token: string }
+      >({
+        providesTags: [{ type: 'Profile' }],
+        query: ({ userName, token }) => {
           return {
             url: `/profiles/${userName}`,
             method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+          };
+        },
+      }),
+      followProfile: builder.mutation<
+        FetchedAuthorData,
+        { userName: string; token: string }
+      >({
+        invalidatesTags: () => {
+          return [{ type: 'Profile' }];
+        },
+        query: ({ userName, token }) => {
+          return {
+            url: `/profiles/${userName}/follow`,
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+          };
+        },
+      }),
+      unfollowProfile: builder.mutation<
+        FetchedAuthorData,
+        { userName: string; token: string }
+      >({
+        invalidatesTags: () => {
+          return [{ type: 'Profile' }];
+        },
+        query: ({ userName, token }) => {
+          return {
+            url: `/profiles/${userName}/follow`,
+            method: 'DELETE',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
           };
         },
       }),
@@ -21,5 +65,9 @@ const profilesApi = createApi({
   },
 });
 
-export const { useFetchProfileQuery } = profilesApi;
+export const {
+  useFetchProfileQuery,
+  useFollowProfileMutation,
+  useUnfollowProfileMutation,
+} = profilesApi;
 export { profilesApi };

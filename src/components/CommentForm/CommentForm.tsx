@@ -6,7 +6,7 @@ import { Avatar } from '@mui/material';
 import { useAppSelector, useCreateCommentMutation } from '../../store';
 
 type Inputs = {
-  body: string;
+  body: string | null;
 };
 
 type CommentFormProps = {
@@ -16,15 +16,27 @@ type CommentFormProps = {
 const CommentForm: React.FC<CommentFormProps> = ({ slug }) => {
   const [createComment] = useCreateCommentMutation();
   const currentUserData = useAppSelector((state) => state.currentUserState);
-  const { control, handleSubmit } = useForm<Inputs>();
+  const { control, handleSubmit, getValues, setError, reset } =
+    useForm<Inputs>();
 
   const handleAddComment = (inputsData: Inputs) => {
-    console.log(slug);
-    createComment({
-      slug: slug,
-      commentBody: inputsData,
-      token: currentUserData.token,
-    });
+    const { body } = getValues();
+
+    const clearInput = () => {
+      reset({ body: null });
+    };
+
+    if (!body) {
+      setError('body', { message: "Comment field can't be empty" });
+    } else {
+      createComment({
+        slug: slug,
+        commentBody: inputsData,
+        token: currentUserData.token,
+      })
+        .unwrap()
+        .then(clearInput);
+    }
   };
 
   const commentInput = (
@@ -37,6 +49,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ slug }) => {
         label='Add Comment'
         multiline
         rows={4}
+        defaultValue={null}
       />
     </div>
   );
