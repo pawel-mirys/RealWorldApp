@@ -11,12 +11,12 @@ import ArticleShowComments from './modules/ArticleShowComments';
 const ArticleShow: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const currentUserData = useAppSelector((state) => state.currentUserState);
+  
   const { data, isFetching, error } = useFetchArticlesBySlugQuery({
     slug: slug!,
     token: currentUserData.token,
   });
 
-  
   const navigate = useNavigate();
 
   if (isFetching) {

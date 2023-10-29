@@ -32,7 +32,8 @@ const SignIn = () => {
     const { email, password } = getValues();
     if (!email) {
       setError('email', { message: 'Email is required' });
-    } else if (!password) {
+    }
+    if (!password) {
       setError('password', { message: 'Password is required' });
     } else {
       loginUser(inputsData);

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Button } from '@mui/material';
 import ArticlesList from '../../components/ArticlesList/ArticlesList';
 import FilteredArticlesList from '../../components/FilteredArticlesList/FilteredArticlesList';
@@ -15,8 +15,13 @@ import PaginationBar from '../../components/Pagination/Pagination';
 
 const Home = () => {
   const page = useAppSelector((state) => state.currentPageState);
-  const { data, isFetching, error } = useFetchArticlesQuery(page.offset);
   const tagState = useAppSelector((state) => state.popularTagState);
+  const currentUserData = useAppSelector((state) => state.currentUserState);
+  const { data, isFetching, error } = useFetchArticlesQuery({
+    offset: page.offset,
+    token: currentUserData.token,
+  });
+
   const dispatch = useAppDispatch();
 
   const list =

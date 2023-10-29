@@ -12,7 +12,7 @@ export type ArticleData = {
   description: string;
   tagList: string[];
   createdAt: string;
-  favourtied: boolean;
+  favorited: boolean;
   favoritesCount: number;
   author: Author;
 };

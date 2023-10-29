@@ -5,24 +5,31 @@ const URL = 'https://api.realworld.io/api';
 
 const articlesApi = createApi({
   reducerPath: 'articles',
-  tagTypes: ['Article', 'Profile'],
+  tagTypes: ['Article'],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints(builder) {
     return {
-      fetchArticles: builder.query<FetchedArticlesData, number>({
-        query: (offset: number) => {
+      fetchArticles: builder.query<
+        FetchedArticlesData,
+        { offset: number; token?: string }
+      >({
+        providesTags: [{ type: 'Article' }],
+        query: ({ offset, token }) => {
           return {
             url: `/articles?limit=10&offset=${offset}`,
             method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
           };
         },
       }),
-
       fetchArticlesBySlug: builder.query<
         { article: ArticleData },
         { slug: string; token: string }
       >({
-        providesTags: [{ type: 'Profile' }],
+        providesTags: [{ type: 'Article' }],
         query: ({ slug, token }) => {
           return {
             url: `/articles/${slug}`,
@@ -66,6 +73,42 @@ const articlesApi = createApi({
           };
         },
       }),
+      likeArticle: builder.mutation<
+        ArticleData,
+        { slug: string; token: string }
+      >({
+        invalidatesTags: () => {
+          return [{ type: 'Article' }];
+        },
+        query: ({ slug, token }) => {
+          return {
+            url: `/articles/${slug}/favorite`,
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+          };
+        },
+      }),
+      dislikeArticle: builder.mutation<
+        ArticleData,
+        { slug: string; token: string }
+      >({
+        invalidatesTags: () => {
+          return [{ type: 'Article' }];
+        },
+        query: ({ slug, token }) => {
+          return {
+            url: `/articles/${slug}/favorite`,
+            method: 'DELETE',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+          };
+        },
+      }),
     };
   },
 });
@@ -76,5 +119,7 @@ export const {
   useFetchArticlesByTagQuery,
   useFetchArticlesBySlugQuery,
   useFetchArticlesCountQuery,
+  useLikeArticleMutation,
+  useDislikeArticleMutation,
 } = articlesApi;
 export { articlesApi };

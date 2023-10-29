@@ -47,6 +47,8 @@ export {
   useFetchArticlesByTagQuery,
   useFetchArticlesBySlugQuery,
   useFetchArticlesCountQuery,
+  useLikeArticleMutation,
+  useDislikeArticleMutation,
 } from './apis/articleApi.ts';
 
 export {
