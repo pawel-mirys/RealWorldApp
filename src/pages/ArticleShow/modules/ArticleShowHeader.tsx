@@ -20,11 +20,13 @@ import useAuthStatus from '../../../hooks/useAuthStatus';
 type ArticleShowHeaderProps = {
   article: ArticleData;
   currentUserData: User;
+  handleEditArticle: () => void;
 };
 
 const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
   article,
   currentUserData,
+  handleEditArticle,
 }) => {
   const navigate = useNavigate();
 
@@ -59,9 +61,9 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
             createdAt={article.createdAt}
           />
         )}
-        <ButtonGroup>
-          {profileData?.profile.username !== currentUserData.username &&
-            (!profileData?.profile.following ? (
+        {profileData?.profile.username !== currentUserData.username ? (
+          <ButtonGroup>
+            {!profileData?.profile.following ? (
               profileData && (
                 <Button
                   variant='outlined'
@@ -87,33 +89,42 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
                 }}>
                 <RemoveIcon /> Unfollow {profileData.profile.username}
               </Button>
-            ))}
-          {!article.favorited ? (
-            <Button
-              variant='outlined'
-              onClick={() => {
-                likeArticle({
-                  slug: article.slug,
-                  token: currentUserData.token,
-                });
-              }}>
-              <FavoriteBorderOutlinedIcon sx={{ mr: '5px' }} /> Like Article{' '}
-              {article.favoritesCount}
-            </Button>
-          ) : (
-            <Button
-              variant='contained'
-              onClick={() => {
-                dislikeArticle({
-                  slug: article.slug,
-                  token: currentUserData.token,
-                });
-              }}>
-              <FavoriteIcon sx={{ mr: '5px' }} /> Dislike Article
-              {article.favoritesCount}
-            </Button>
-          )}
-        </ButtonGroup>
+            )}
+            {!article.favorited ? (
+              <Button
+                variant='outlined'
+                onClick={() => {
+                  !isLoggedIn
+                    ? navigate('/signin')
+                    : likeArticle({
+                        slug: article.slug,
+                        token: currentUserData.token,
+                      });
+                }}>
+                <FavoriteBorderOutlinedIcon sx={{ mr: '5px' }} /> Like Article{' '}
+                {article.favoritesCount}
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                className='mr-5'
+                onClick={() => {
+                  dislikeArticle({
+                    slug: article.slug,
+                    token: currentUserData.token,
+                  });
+                }}>
+                <FavoriteIcon sx={{ mr: '5px' }} /> Dislike Article
+                {article.favoritesCount}
+              </Button>
+            )}
+          </ButtonGroup>
+        ) : (
+          <ButtonGroup>
+            <Button onClick={handleEditArticle}> Edit Article</Button>
+            <Button color='warning'>Delete Article</Button>
+          </ButtonGroup>
+        )}
       </div>
     </header>
   );

@@ -46,7 +46,13 @@ const AccountMenu = () => {
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Button size='small' variant='text' color='inherit'>
+        <Button
+          size='small'
+          variant='text'
+          color='inherit'
+          onClick={() => {
+            navigate('/creator');
+          }}>
           New Article
           <CreateIcon sx={{ width: '15px', height: '15px', ml: '5px' }} />
         </Button>

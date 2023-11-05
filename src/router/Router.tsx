@@ -8,7 +8,7 @@ import ArticleShow from '../pages/ArticleShow/ArticleShow';
 import useAuthStatus from '../hooks/useAuthStatus';
 import NotFound from '../pages/NotFound/NotFound';
 import Settings from '../pages/Settings/Settings';
-
+import ArticleCreator from '../pages/ArticleCreator/ArticleCreator';
 
 const RouterSwitch = () => {
   const isLoggedIn = useAuthStatus();
@@ -16,6 +16,10 @@ const RouterSwitch = () => {
   return (
     <Routes>
       <Route path='/article/:slug' element={<ArticleShow />} />
+      <Route
+        path='/creator'
+        element={isLoggedIn ? <ArticleCreator /> : <Login />}
+      />
       <Route path='/profiles/:username' element={<Profile />} />
       <Route
         path='/settings'

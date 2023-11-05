@@ -5,6 +5,13 @@ export type Author = {
   following: boolean;
 };
 
+export type DataToPublish = {
+  title: string;
+  description: string;
+  body: string;
+  tags: string[] | null;
+};
+
 export type ArticleData = {
   slug: string;
   title: string;
