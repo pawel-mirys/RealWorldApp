@@ -7,7 +7,7 @@ import ArticleShowFooter from './modules/ArticleShowFooter';
 import clsx from 'clsx';
 import TagsList from '../../components/TagsList/TagsList';
 import ArticleShowComments from './modules/ArticleShowComments';
-import ArticleForm from '../../components/ArticleForm/ArticleForm';
+import ArticleForm from '../../components/ArticleForm/ArticleFormContainer';
 
 const ArticleShow: React.FC = () => {
   const [isEditable, setIsEditable] = useState(false);
@@ -74,7 +74,15 @@ const ArticleShow: React.FC = () => {
         </div>
       ) : (
         <div>
-          <ArticleForm onCancel={handleEditArticle} />
+          <ArticleForm
+            onCancel={handleEditArticle}
+            articleData={{
+              title: data.article.title,
+              description: data.article.description,
+              body: data.article.body,
+              tags: data.article.tagList,
+            }}
+          />
         </div>
       )}
     </Box>

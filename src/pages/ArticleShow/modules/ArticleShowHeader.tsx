@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { ArticleData, User } from '../../../types';
 import Author from '../../../components/Author/Author';
@@ -40,10 +40,6 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
   const [followProfile] = useFollowProfileMutation();
   const [unfollowProfile] = useUnfollowProfileMutation();
   const isLoggedIn = useAuthStatus();
-
-  useEffect(() => {
-    console.log(article);
-  });
 
   return (
     <header
