@@ -99,8 +99,8 @@ const ArticleShow: React.FC = () => {
       )}
       <AlertDialog
         isOpen={openDialog}
-        dialogTitle='Delete article'
-        dialogText='Are you sure you want to delete this article?'
+        dialogTitle='Are you sure?'
+        dialogText='Do you really want to delete this article? This process cannot be undone.'
         agreeButtonText='Delete'
         disagreeButtonText='Cancel'
         onAgree={() => {

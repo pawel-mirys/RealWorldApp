@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { ArticleData, FetchedArticlesData } from '../../types';
+import { ArticleData, DataToPublish, FetchedArticlesData } from '../../types';
 
 const URL = 'https://api.realworld.io/api';
 
@@ -54,6 +54,7 @@ const articlesApi = createApi({
         FetchedArticlesData,
         { author: string; token?: string }
       >({
+        providesTags: [{ type: 'Article' }],
         query: ({ author, token }) => {
           return {
             url: `/articles?author=${author}`,
@@ -109,6 +110,29 @@ const articlesApi = createApi({
           };
         },
       }),
+
+      publishArticle: builder.mutation<
+        ArticleData,
+        { dataToPublish: DataToPublish; token: string }
+      >({
+        invalidatesTags: () => {
+          return [{ type: 'Article' }];
+        },
+        query: ({ dataToPublish, token }) => {
+          return {
+            url: `/articles`,
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+            body: {
+              article: dataToPublish,
+            },
+          };
+        },
+      }),
+
       deleteArticle: builder.mutation<
         ArticleData,
         { slug: string; token: string }
@@ -140,5 +164,6 @@ export const {
   useLikeArticleMutation,
   useDislikeArticleMutation,
   useDeleteArticleMutation,
+  usePublishArticleMutation,
 } = articlesApi;
 export { articlesApi };

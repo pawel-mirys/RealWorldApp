@@ -5,6 +5,8 @@ import Form from '../Form/Form';
 import { Button } from '@mui/material';
 import { DataToPublish } from '../../types';
 import AlertDialog from '../AlertDialog/AlertDialog';
+import { useAppSelector, usePublishArticleMutation } from '../../store';
+import { useNavigate } from 'react-router-dom';
 
 type ArticleFormContainerProps = {
   onCancel: () => void;
@@ -25,9 +27,12 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
   onCancel,
   articleData,
 }) => {
+  const token = useAppSelector((state) => state.currentUserState.token);
+  const [publishArticle, { isSuccess }] = usePublishArticleMutation();
   const [publishData, setPublishData] = useState<DataToPublish>();
   const [tags, setTags] = useState<string[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const navigate = useNavigate();
 
   const {
     control: infoControl,
@@ -83,13 +88,25 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
         message: 'Body is required',
       });
     } else {
-      console.log(publishData);
+      if (publishData) {
+        articleData
+          ? console.log(articleData)
+          : publishArticle({
+              dataToPublish: {
+                title: publishData.title,
+                description: publishData.description,
+                body: publishData.body,
+                tags: publishData.tags,
+              },
+              token: token,
+            });
+        isSuccess && navigate('/');
+      }
     }
   };
 
   const handleCreateTag = (tagInput: TagsInput) => {
     const { tag } = getTagValue();
-
     if (!tag) {
       setTagError('tag', { message: 'Tag field is required to add a tag' });
     } else if (tags.includes(tag)) {

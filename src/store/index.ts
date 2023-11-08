@@ -50,6 +50,7 @@ export {
   useLikeArticleMutation,
   useDislikeArticleMutation,
   useDeleteArticleMutation,
+  usePublishArticleMutation,
 } from './apis/articleApi.ts';
 
 export {
