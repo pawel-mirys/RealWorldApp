@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, Skeleton } from '@mui/material';
-import { useAppSelector, useFetchArticlesBySlugQuery } from '../../store';
+import {
+  useAppSelector,
+  useDeleteArticleMutation,
+  useFetchArticlesBySlugQuery,
+} from '../../store';
 import ArticleShowHeader from './modules/ArticleShowHeader';
 import ArticleShowFooter from './modules/ArticleShowFooter';
 import clsx from 'clsx';
 import TagsList from '../../components/TagsList/TagsList';
 import ArticleShowComments from './modules/ArticleShowComments';
 import ArticleForm from '../../components/ArticleForm/ArticleFormContainer';
+import AlertDialog from '../../components/AlertDialog/AlertDialog';
 
 const ArticleShow: React.FC = () => {
   const [isEditable, setIsEditable] = useState(false);
-
+  const [openDialog, setOpenDialog] = useState(false);
   const { slug } = useParams<{ slug: string }>();
   const currentUserData = useAppSelector((state) => state.currentUserState);
 
@@ -19,6 +24,8 @@ const ArticleShow: React.FC = () => {
     slug: slug!,
     token: currentUserData.token,
   });
+
+  const [deleteArticle] = useDeleteArticleMutation();
 
   const navigate = useNavigate();
 
@@ -40,6 +47,10 @@ const ArticleShow: React.FC = () => {
     setIsEditable((prev) => !prev);
   };
 
+  const handleDeleteArticle = () => {
+    setOpenDialog((prev) => !prev);
+  };
+
   return (
     <Box>
       {!isEditable ? (
@@ -47,6 +58,7 @@ const ArticleShow: React.FC = () => {
           <ArticleShowHeader
             article={article}
             currentUserData={currentUserData}
+            handleDeleteArticle={handleDeleteArticle}
             handleEditArticle={handleEditArticle}
           />
           <div className={clsx('content', 'w-4/6 m-auto text-lg')}>
@@ -85,6 +97,21 @@ const ArticleShow: React.FC = () => {
           />
         </div>
       )}
+      <AlertDialog
+        isOpen={openDialog}
+        dialogTitle='Delete article'
+        dialogText='Are you sure you want to delete this article?'
+        agreeButtonText='Delete'
+        disagreeButtonText='Cancel'
+        onAgree={() => {
+          setOpenDialog(false);
+          deleteArticle({ slug: slug!, token: currentUserData.token });
+          navigate('/');
+        }}
+        onDisagree={() => {
+          setOpenDialog(false);
+        }}
+      />
     </Box>
   );
 };

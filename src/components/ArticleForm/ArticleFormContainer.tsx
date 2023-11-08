@@ -43,7 +43,6 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
     handleSubmit: handleAddTag,
     getValues: getTagValue,
     setError: setTagError,
-    reset: tagReset,
   } = useForm<TagsInput>();
 
   useEffect(() => {
@@ -97,7 +96,6 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
       setTagError('tag', { message: 'This tag already exist' });
     } else {
       setTags((prev) => [...prev, tagInput.tag]);
-      tagReset();
     }
   };
 
@@ -170,9 +168,9 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
   );
 
   return (
-    <div className='h-screen w-3/6 m-auto'>
+    <div className='h-screen w-4/6 m-auto'>
       <div className='flex flex-row gap-4'>
-        <div className='flex flex-col gap-3 w-3/5 '>
+        <div className='flex flex-col gap-3 w-4/5 '>
           <Form
             inputs={infoInputs}
             submitButtonLabel='Publish article'

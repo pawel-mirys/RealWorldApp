@@ -49,6 +49,7 @@ export {
   useFetchArticlesCountQuery,
   useLikeArticleMutation,
   useDislikeArticleMutation,
+  useDeleteArticleMutation,
 } from './apis/articleApi.ts';
 
 export {

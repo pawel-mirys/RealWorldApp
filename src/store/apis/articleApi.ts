@@ -109,6 +109,24 @@ const articlesApi = createApi({
           };
         },
       }),
+      deleteArticle: builder.mutation<
+        ArticleData,
+        { slug: string; token: string }
+      >({
+        invalidatesTags: () => {
+          return [{ type: 'Article' }];
+        },
+        query: ({ slug, token }) => {
+          return {
+            url: `/articles/${slug}`,
+            method: 'DELETE',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+          };
+        },
+      }),
     };
   },
 });
@@ -121,5 +139,6 @@ export const {
   useFetchArticlesCountQuery,
   useLikeArticleMutation,
   useDislikeArticleMutation,
+  useDeleteArticleMutation,
 } = articlesApi;
 export { articlesApi };

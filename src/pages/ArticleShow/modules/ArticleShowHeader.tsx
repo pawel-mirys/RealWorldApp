@@ -21,12 +21,14 @@ type ArticleShowHeaderProps = {
   article: ArticleData;
   currentUserData: User;
   handleEditArticle: () => void;
+  handleDeleteArticle: () => void;
 };
 
 const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
   article,
   currentUserData,
   handleEditArticle,
+  handleDeleteArticle,
 }) => {
   const navigate = useNavigate();
 
@@ -118,7 +120,9 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
         ) : (
           <ButtonGroup>
             <Button onClick={handleEditArticle}> Edit Article</Button>
-            <Button color='warning'>Delete Article</Button>
+            <Button onClick={handleDeleteArticle} color='warning'>
+              Delete Article
+            </Button>
           </ButtonGroup>
         )}
       </div>
