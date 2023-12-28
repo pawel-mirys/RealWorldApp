@@ -3,6 +3,9 @@ import { Button } from '@mui/material';
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 import {
+  resetToken,
+  resetUserData,
+  useAppDispatch,
   useAppSelector,
   useUpdateCurrentUserSettingsMutation,
 } from '../../store';
@@ -68,6 +71,7 @@ const Settings = () => {
     bio: '',
   });
 
+  const dispatch = useAppDispatch();
   const { control, handleSubmit, setValue, formState, reset, setError } =
     useForm<SettingsInputs>();
 
@@ -93,11 +97,16 @@ const Settings = () => {
     }
   };
 
+  const handleLogOut = () => {
+    dispatch(resetToken());
+    dispatch(resetUserData());
+  };
+
   const handleUpdateData = (inputsData: SettingsInputs) => {
     updateUser({ token: currentUserData.token, user: inputsData })
       .unwrap()
       .then(() => {
-        window.location.reload();
+        handleLogOut();
       })
       .catch((error) => {
         setError('root', { type: 'custom', message: error });
@@ -121,6 +130,8 @@ const Settings = () => {
         name={field.name}
         label={field.label}
         defaultValue={userData[field.name]}
+        multiline
+        minRows={field.name === 'bio' ? 5 : 1}
       />
     </div>
   ));
@@ -131,7 +142,10 @@ const Settings = () => {
         'settings-page',
         'flex flex-col items-center w-full h-screen'
       )}>
-      <h1 className='text-4xl text-center mt-5'>User Settings</h1>
+      <h1 className='text-4xl text-center my-5'>User Settings</h1>
+      <p className='text-red-600 my-5'>
+        Warning: After confirming the changes, you will be logged out.
+      </p>
       <div className='flex flex-col gap-3 w-2/6'>
         {isEditable ? (
           <>

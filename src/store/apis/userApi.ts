@@ -39,6 +39,7 @@ const userApi = createApi({
         },
       }),
       getCurrentUserData: builder.query<{ user: User }, string | null>({
+        providesTags: [{ type: 'User' }],
         query: (token: string) => {
           return {
             url: '/user',
@@ -54,6 +55,9 @@ const userApi = createApi({
         { user: UpdateUserData },
         { token: string | null; user: UpdateUserData }
       >({
+        invalidatesTags: () => {
+          return [{ type: 'User' }];
+        },
         query: ({ token, user }) => {
           return {
             url: '/user',
