@@ -38,7 +38,6 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
   });
   const [likeArticle] = useLikeArticleMutation();
   const [dislikeArticle] = useDislikeArticleMutation();
-
   const [followProfile] = useFollowProfileMutation();
   const [unfollowProfile] = useUnfollowProfileMutation();
   const isLoggedIn = useAuthStatus();
@@ -99,8 +98,8 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
                         token: currentUserData.token,
                       });
                 }}>
-                <FavoriteBorderOutlinedIcon sx={{ mr: '5px' }} /> Like Article{' '}
-                {article.favoritesCount}
+                <FavoriteBorderOutlinedIcon sx={{ mr: '5px' }} />
+                {`Like Article ${article.favoritesCount}`}
               </Button>
             ) : (
               <Button
@@ -112,8 +111,8 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
                     token: currentUserData.token,
                   });
                 }}>
-                <FavoriteIcon sx={{ mr: '5px' }} /> Dislike Article
-                {article.favoritesCount}
+                <FavoriteIcon sx={{ mr: '5px' }} />
+                {`Dislike Article ${article.favoritesCount}`}
               </Button>
             )}
           </ButtonGroup>

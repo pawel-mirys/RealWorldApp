@@ -88,11 +88,12 @@ const ArticleShow: React.FC = () => {
         <div>
           <ArticleForm
             onCancel={handleEditArticle}
+            slug={slug}
             articleData={{
               title: data.article.title,
               description: data.article.description,
               body: data.article.body,
-              tags: data.article.tagList,
+              tagList: data.article.tagList,
             }}
           />
         </div>

@@ -51,6 +51,7 @@ export {
   useDislikeArticleMutation,
   useDeleteArticleMutation,
   usePublishArticleMutation,
+  useUpdateArticleMutation,
 } from './apis/articleApi.ts';
 
 export {

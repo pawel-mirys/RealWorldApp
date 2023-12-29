@@ -11,10 +11,10 @@ import {
   useDislikeArticleMutation,
   useAppSelector,
 } from '../../store';
+import useAuthStatus from '../../hooks/useAuthStatus';
 
 type ArticleProps = {
   article: ArticleData;
-
   className?: string;
 };
 
@@ -22,7 +22,7 @@ const Article: React.FC<ArticleProps> = ({ article, className, ...props }) => {
   const [likeArticle] = useLikeArticleMutation();
   const [dislikeArticle] = useDislikeArticleMutation();
   const currentUserData = useAppSelector((state) => state.currentUserState);
-
+  const isLoggedIn = useAuthStatus();
   const navigate = useNavigate();
 
   const handleShowArticle = () => {
@@ -43,10 +43,12 @@ const Article: React.FC<ArticleProps> = ({ article, className, ...props }) => {
         {!article.favorited ? (
           <Button
             onClick={() => {
-              likeArticle({
-                slug: article.slug,
-                token: currentUserData.token,
-              });
+              !isLoggedIn
+                ? navigate('/signin')
+                : likeArticle({
+                    slug: article.slug,
+                    token: currentUserData.token,
+                  });
             }}>
             <FavoriteBorderOutlinedIcon sx={{ mr: '5px' }} />
             {`Like Article  | ${article.favoritesCount}`}

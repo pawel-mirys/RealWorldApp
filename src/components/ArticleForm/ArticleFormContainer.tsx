@@ -5,12 +5,17 @@ import Form from '../Form/Form';
 import { Button } from '@mui/material';
 import { DataToPublish } from '../../types';
 import AlertDialog from '../AlertDialog/AlertDialog';
-import { useAppSelector, usePublishArticleMutation } from '../../store';
+import {
+  useAppSelector,
+  usePublishArticleMutation,
+  useUpdateArticleMutation,
+} from '../../store';
 import { useNavigate } from 'react-router-dom';
 
 type ArticleFormContainerProps = {
   onCancel: () => void;
   articleData?: DataToPublish;
+  slug?: string;
 };
 
 type InfoInputs = {
@@ -26,9 +31,11 @@ type TagsInput = {
 const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
   onCancel,
   articleData,
+  slug,
 }) => {
   const token = useAppSelector((state) => state.currentUserState.token);
-  const [publishArticle, { isSuccess }] = usePublishArticleMutation();
+  const [publishArticle] = usePublishArticleMutation();
+  const [updateArticle] = useUpdateArticleMutation();
   const [publishData, setPublishData] = useState<DataToPublish>();
   const [tags, setTags] = useState<string[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
@@ -58,9 +65,7 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
       setInfoValues('title', articleData.title);
       setInfoValues('description', articleData.description);
       setInfoValues('body', articleData.body);
-      if (articleData.tags !== null) {
-        setTags([...articleData.tags]);
-      }
+      setTags([...articleData.tagList]);
     }
   }, [articleData, setInfoValues]);
 
@@ -69,9 +74,9 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
       title: getInfoValues('title'),
       description: getInfoValues('description'),
       body: getInfoValues('body'),
-      tags: tags,
+      tagList: tags,
     });
-  }, [tags, publishData, getInfoValues]);
+  }, [tags, getInfoValues]);
 
   const handlePublishArticle = () => {
     const { title, description, body } = getInfoValues();
@@ -89,18 +94,28 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
       });
     } else {
       if (publishData) {
-        articleData
-          ? console.log(articleData)
-          : publishArticle({
-              dataToPublish: {
-                title: publishData.title,
-                description: publishData.description,
-                body: publishData.body,
-                tags: publishData.tags,
-              },
-              token: token,
-            });
-        isSuccess && navigate('/');
+        if (articleData) {
+          updateArticle({
+            dataToPublish: {
+              title: publishData.title,
+              description: publishData.description,
+              body: publishData.body,
+              tagList: publishData.tagList,
+            },
+            token: token,
+            slug: slug!,
+          });
+        } else
+          publishArticle({
+            dataToPublish: {
+              title: publishData.title,
+              description: publishData.description,
+              body: publishData.body,
+              tagList: publishData.tagList,
+            },
+            token: token,
+          });
+        navigate('/');
       }
     }
   };

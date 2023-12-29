@@ -5,7 +5,7 @@ const URL = 'https://api.realworld.io/api';
 
 const articlesApi = createApi({
   reducerPath: 'articles',
-  tagTypes: ['Article'],
+  tagTypes: ['Article', 'ArticleLikesCount'],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints(builder) {
     return {
@@ -25,6 +25,7 @@ const articlesApi = createApi({
           };
         },
       }),
+
       fetchArticlesBySlug: builder.query<
         { article: ArticleData },
         { slug: string; token: string }
@@ -41,6 +42,7 @@ const articlesApi = createApi({
           };
         },
       }),
+
       fetchArticlesByTag: builder.query<FetchedArticlesData, string>({
         query: (tag: string) => {
           return {
@@ -74,6 +76,7 @@ const articlesApi = createApi({
           };
         },
       }),
+
       likeArticle: builder.mutation<
         ArticleData,
         { slug: string; token: string }
@@ -92,6 +95,7 @@ const articlesApi = createApi({
           };
         },
       }),
+
       dislikeArticle: builder.mutation<
         ArticleData,
         { slug: string; token: string }
@@ -122,6 +126,28 @@ const articlesApi = createApi({
           return {
             url: `/articles`,
             method: 'POST',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
+            body: {
+              article: dataToPublish,
+            },
+          };
+        },
+      }),
+
+      updateArticle: builder.mutation<
+        ArticleData,
+        { dataToPublish: DataToPublish; token: string; slug: string }
+      >({
+        invalidatesTags: () => {
+          return [{ type: 'Article' }];
+        },
+        query: ({ dataToPublish, token, slug }) => {
+          return {
+            url: `/articles/${slug}`,
+            method: 'PUT',
             headers: {
               accept: 'application/json',
               Authorization: `Token ${token}`,
@@ -164,6 +190,7 @@ export const {
   useLikeArticleMutation,
   useDislikeArticleMutation,
   useDeleteArticleMutation,
+  useUpdateArticleMutation,
   usePublishArticleMutation,
 } = articlesApi;
 export { articlesApi };

@@ -9,7 +9,7 @@ export type DataToPublish = {
   title: string;
   description: string;
   body: string;
-  tags: string[] | null;
+  tagList: string[];
 };
 
 export type ArticleData = {
