@@ -41,7 +41,7 @@ const ArticleShowFooter: React.FC<ArticleShowFooterProps> = ({ slug }) => {
     <div
       className={clsx(
         'article-footer',
-        'flex items-center justify-center w-3/6 m-auto '
+        'flex items-center justify-center w-3/6 mx-auto '
       )}>
       {renderedContent()}
     </div>

@@ -1,12 +1,10 @@
 import clsx from 'clsx';
-import styles from './Footer.module.scss';
 
 const Footer = () => {
   return (
     <footer
       className={clsx(
-        styles.footer,
-        'flex flex-row gap-3 justify-center items-center  border-t-2'
+        'flex flex-row gap-1 justify-center items-center border-t-2 h-20 mt-5'
       )}>
       <div>
         <span> The project is based on</span>
@@ -17,7 +15,7 @@ const Footer = () => {
           RealWorld
         </a>
       </div>
-      and
+      &
       <div>
         <span>RealWorld</span>
         <a

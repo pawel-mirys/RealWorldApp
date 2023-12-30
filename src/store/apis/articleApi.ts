@@ -43,23 +43,30 @@ const articlesApi = createApi({
         },
       }),
 
-      fetchArticlesByTag: builder.query<FetchedArticlesData, string>({
-        query: (tag: string) => {
+      fetchArticlesByTag: builder.query<
+        FetchedArticlesData,
+        { tag: string; offset: number; token?: string }
+      >({
+        query: ({ tag, offset, token }) => {
           return {
-            url: `/articles?tag=${tag}`,
+            url: `/articles?limit=10&offset=${offset}&tag=${tag}`,
             method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Token ${token}`,
+            },
           };
         },
       }),
 
       fetchProfileArticles: builder.query<
         FetchedArticlesData,
-        { author: string; token?: string }
+        { author: string; offset: number; token?: string }
       >({
         providesTags: [{ type: 'Article' }],
-        query: ({ author, token }) => {
+        query: ({ author, offset, token }) => {
           return {
-            url: `/articles?author=${author}`,
+            url: `/articles?author=${author}&limit=5&offset=${offset}`,
             method: 'GET',
             headers: {
               accept: 'application/json',

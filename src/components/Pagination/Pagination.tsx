@@ -1,15 +1,13 @@
 import Pagination from '@mui/material/Pagination';
-import {
-  updateCurrentPage,
-  useAppDispatch,
-  useFetchArticlesCountQuery,
-} from '../../store';
+import { updateCurrentPage, useAppDispatch } from '../../store';
+import React, { useEffect } from 'react';
 
-const PaginationBar = () => {
-  const { data } = useFetchArticlesCountQuery();
+type PaginationBarProps = {
+  articlesCount: number;
+};
+
+const PaginationBar: React.FC<PaginationBarProps> = ({ articlesCount }) => {
   const dispatch = useAppDispatch();
-
-  const articlesCount = data?.articlesCount || 0;
   const articlesPerPage = 10;
   const totalPages = Math.ceil(articlesCount / articlesPerPage);
 
@@ -17,6 +15,14 @@ const PaginationBar = () => {
     const offset = value * 10 - 10;
     dispatch(updateCurrentPage(offset));
   };
+
+  useEffect(() => {
+    console.log(articlesCount);
+  }, [articlesCount]);
+
+  useEffect(() => {
+    dispatch(updateCurrentPage(0));
+  }, [dispatch]);
 
   return (
     <div className='flex items-center my-10 mx-auto w-full'>

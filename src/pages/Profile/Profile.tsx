@@ -8,7 +8,7 @@ const Profile = () => {
   const currentUserData = useAppSelector((state) => state.currentUserState);
   return (
     username && (
-      <div>
+      <div className='min-h-screen'>
         <ProfileHeader username={username} currentUser={currentUserData} />
         <ProfileArticlesList
           username={username}

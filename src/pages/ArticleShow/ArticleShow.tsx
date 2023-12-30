@@ -54,17 +54,18 @@ const ArticleShow: React.FC = () => {
   return (
     <Box>
       {!isEditable ? (
-        <div className={clsx('article-show', 'flex flex-col gap-7 ')}>
+        <div
+          className={clsx('article-show', 'flex flex-col gap-7 min-h-screen')}>
           <ArticleShowHeader
             article={article}
             currentUserData={currentUserData}
             handleDeleteArticle={handleDeleteArticle}
             handleEditArticle={handleEditArticle}
           />
-          <div className={clsx('content', 'w-4/6 m-auto text-lg')}>
+          <div className={clsx('content', 'w-4/6 mx-auto text-lg')}>
             <p>{article.body}</p>
           </div>
-          <div className={clsx('tags', 'w-4/6 m-auto')}>
+          <div className={clsx('tags', 'w-4/6 mx-auto')}>
             <TagsList
               data={article.tagList}
               isLoading={isFetching}

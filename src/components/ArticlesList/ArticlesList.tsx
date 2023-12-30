@@ -3,6 +3,7 @@ import React from 'react';
 import { Skeleton } from '@mui/material';
 import Article from '../Article/Article';
 import { ArticleData, FetchedArticlesData } from '../../types';
+import PaginationBar from '../Pagination/Pagination';
 
 type ArticleListProps = {
   data: FetchedArticlesData | undefined;
@@ -33,6 +34,7 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   return (
     <div className='article-list flex flex-col flex-auto gap-5 mt-5'>
       {content}
+      {data && <PaginationBar articlesCount={data.articlesCount} />}
     </div>
   );
 };

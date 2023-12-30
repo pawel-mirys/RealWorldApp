@@ -1,6 +1,6 @@
 import React from 'react';
 import ArticlesList from '../../../components/ArticlesList/ArticlesList';
-import { useFetchProfileArticlesQuery } from '../../../store';
+import { useAppSelector, useFetchProfileArticlesQuery } from '../../../store';
 import { User } from '../../../types';
 
 type ProfileArticlesListProps = {
@@ -12,9 +12,11 @@ const ProfileArticlesList: React.FC<ProfileArticlesListProps> = ({
   username,
   currentUser,
 }) => {
+  const page = useAppSelector((state) => state.currentPageState);
   const { data, isFetching, error } = useFetchProfileArticlesQuery({
     author: username,
     token: currentUser.token,
+    offset: page.offset,
   });
 
   return (

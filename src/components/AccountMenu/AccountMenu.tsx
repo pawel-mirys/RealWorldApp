@@ -49,7 +49,7 @@ const AccountMenu = () => {
         <Button
           size='small'
           variant='text'
-          color='inherit'
+          sx={{ color: 'white' }}
           onClick={() => {
             navigate('/creator');
           }}>
