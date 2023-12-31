@@ -23,15 +23,7 @@ const FilteredArticlesList = () => {
     token: currentUserData.token,
   });
 
-  let list;
-
-  if (data && data?.articles.length > 0) {
-    list = <ArticlesList data={data} isFetching={isFetching} error={error} />;
-  } else {
-    list = <div className='mt-5 text-lg'>No Articles To show...</div>;
-  }
-
-  return list;
+  return <ArticlesList data={data} isFetching={isFetching} error={error} />;
 };
 
 export default FilteredArticlesList;

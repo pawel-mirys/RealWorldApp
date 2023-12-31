@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import ArticleComment from '../../../components/ArticleComment/ArticleComment';
 import { useAppSelector, useFetchArticleCommentsQuery } from '../../../store';
+import ScrollUpArrow from '../../../components/ScrollUpArrow/ScrollUpArrow';
 
 type ArticleShowCommentsProps = {
   slug: string;
@@ -27,10 +28,13 @@ const ArticleShowComments: React.FC<ArticleShowCommentsProps> = ({ slug }) => {
   }
 
   return (
-    <div className={clsx('comments', 'flex flex-col w-2/5 m-auto')}>
-      {data?.comments.map((comment) => (
-        <ArticleComment key={comment.id} slug={slug} data={comment} />
-      ))}
+    <div className='flex flex-row justify-center items-end w-full m-auto'>
+      <div className={clsx('comments', 'flex flex-col w-2/5 ')}>
+        {data?.comments.map((comment) => (
+          <ArticleComment key={comment.id} slug={slug} data={comment} />
+        ))}
+      </div>
+      <ScrollUpArrow />
     </div>
   );
 };

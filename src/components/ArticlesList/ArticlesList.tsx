@@ -4,6 +4,7 @@ import { Skeleton } from '@mui/material';
 import Article from '../Article/Article';
 import { ArticleData, FetchedArticlesData } from '../../types';
 import PaginationBar from '../Pagination/Pagination';
+import ScrollUpArrow from '../ScrollUpArrow/ScrollUpArrow';
 
 type ArticleListProps = {
   data: FetchedArticlesData | undefined;
@@ -20,7 +21,7 @@ const ArticlesList: React.FC<ArticleListProps> = ({
 
   if (isFetching) {
     const skeletons = Array.from({ length: 10 }, (_, i) => (
-      <Skeleton animation='wave' key={i} height={'150px'} />
+      <Skeleton animation='wave' key={i} height={'150px'} width={'100%'} />
     ));
     content = skeletons;
   } else if (error) {
@@ -32,9 +33,12 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   }
 
   return (
-    <div className='article-list flex flex-col flex-auto gap-5 mt-5'>
-      {content}
-      {data && <PaginationBar articlesCount={data.articlesCount} />}
+    <div className='flex flex-row justify-end items-end w-full'>
+      <div className='article-list flex flex-col flex-auto gap-5 mt-5'>
+        {content}
+        {data && <PaginationBar articlesCount={data.articlesCount} />}
+      </div>
+      {data && data?.articlesCount > 5 && <ScrollUpArrow />}
     </div>
   );
 };
