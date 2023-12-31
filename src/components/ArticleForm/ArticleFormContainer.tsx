@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import FormInput from '../FormInput/FormInput';
 import { useForm } from 'react-hook-form';
@@ -71,16 +70,13 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
   }, [articleData, setInfoValues]);
 
   useEffect(() => {
-    setPublishData(
-      (prevData) =>
-        (prevData = {
-          title: getInfoValues('title'),
-          description: getInfoValues('description'),
-          body: getInfoValues('body'),
-          tagList: tags,
-        })
-    );
-  }, [tags, getInfoValues]);
+    setPublishData(() => ({
+      title: getInfoValues('title'),
+      description: getInfoValues('description'),
+      body: getInfoValues('body'),
+      tagList: tags,
+    }));
+  }, [tags, getInfoValues, publishData]);
 
   const handlePublishArticle = () => {
     const { title, description, body } = getInfoValues();
