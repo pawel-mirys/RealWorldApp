@@ -16,7 +16,7 @@ const ArticleShowFooter: React.FC<ArticleShowFooterProps> = ({ slug }) => {
     let content: JSX.Element;
     if (!isLoggedIn) {
       content = (
-        <>
+        <div>
           <span
             onClick={() => navigate('/signin')}
             className='text-blue-600 cursor-pointer mr-1'>
@@ -29,7 +29,7 @@ const ArticleShowFooter: React.FC<ArticleShowFooterProps> = ({ slug }) => {
             Sign Up
           </span>
           to add comments on this article.
-        </>
+        </div>
       );
     } else {
       content = <CommentForm slug={slug} />;
@@ -41,7 +41,7 @@ const ArticleShowFooter: React.FC<ArticleShowFooterProps> = ({ slug }) => {
     <div
       className={clsx(
         'article-footer',
-        'flex items-center justify-center w-3/6 mx-auto '
+        'flex items-center justify-center lg:w-3/6 lg:mx-auto mx-4 '
       )}>
       {renderedContent()}
     </div>

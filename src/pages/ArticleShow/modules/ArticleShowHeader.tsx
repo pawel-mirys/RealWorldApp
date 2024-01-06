@@ -48,10 +48,13 @@ const ArticleShowHeader: React.FC<ArticleShowHeaderProps> = ({
         'article-header',
         'flex flex-col gap-10 bg-zinc-700 py-7'
       )}>
-      <h2 className={clsx('text-4xl font-bold text-gray-200 w-4/6 m-auto')}>
+      <h2
+        className={clsx(
+          'lg:text-4xl text-3xl font-bold text-gray-200 mx-4 lg:w-4/6 lg:m-auto'
+        )}>
         {article.title}
       </h2>
-      <div className='flex flex-row items-center gap-5 w-4/6 m-auto'>
+      <div className='flex flex-col lg:flex-row items-center gap-5 lg:w-4/6 lg:m-auto mx-3'>
         {profileData && (
           <Author
             authorData={profileData.profile}

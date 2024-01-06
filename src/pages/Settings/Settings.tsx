@@ -140,13 +140,13 @@ const Settings = () => {
     <div
       className={clsx(
         'settings-page',
-        'flex flex-col items-center w-full h-screen'
+        'flex flex-col items-center lg:w-full h-screen m-4'
       )}>
       <h1 className='text-4xl text-center my-5'>User Settings</h1>
       <p className='text-red-600 my-5'>
         Warning: After confirming the changes, you will be logged out.
       </p>
-      <div className='flex flex-col gap-3 w-2/6'>
+      <div className='flex flex-col gap-4 w-full lg:w-3/6 mx-4 '>
         {isEditable ? (
           <>
             <Form

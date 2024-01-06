@@ -51,7 +51,7 @@ const Article: React.FC<ArticleProps> = ({ article, className, ...props }) => {
                   });
             }}>
             <FavoriteBorderOutlinedIcon sx={{ mr: '5px' }} />
-            {`Like Article  | ${article.favoritesCount}`}
+            {article.favoritesCount}
           </Button>
         ) : (
           <Button
@@ -62,7 +62,7 @@ const Article: React.FC<ArticleProps> = ({ article, className, ...props }) => {
               });
             }}>
             <FavoriteIcon sx={{ mr: '5px' }} />
-            {`Dislike Article  | ${article.favoritesCount}`}
+            {article.favoritesCount}
           </Button>
         )}
       </div>

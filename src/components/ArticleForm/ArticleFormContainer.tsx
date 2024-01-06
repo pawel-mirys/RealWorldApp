@@ -200,7 +200,7 @@ const ArticleFormContainer: React.FC<ArticleFormContainerProps> = ({
   );
 
   return (
-    <div className='h-screen w-4/6 m-auto'>
+    <div className='h-screen lg:w-4/6 lg:m-auto m-4'>
       <div className='flex flex-row gap-4'>
         <div className='flex flex-col gap-3 w-4/5 '>
           <Form

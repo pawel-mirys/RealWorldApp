@@ -21,7 +21,12 @@ const ArticlesList: React.FC<ArticleListProps> = ({
 
   if (isFetching) {
     const skeletons = Array.from({ length: 10 }, (_, i) => (
-      <Skeleton animation='wave' key={i} height={'150px'} width={'100%'} />
+      <Skeleton
+        animation='wave'
+        key={i}
+        height={'150px'}
+        sx={{ width: '100vw' }}
+      />
     ));
     content = skeletons;
   } else if (error) {
@@ -33,12 +38,14 @@ const ArticlesList: React.FC<ArticleListProps> = ({
   }
 
   return (
-    <div className='flex flex-row justify-end items-end w-full'>
+    <div className='flex flex-row justify-end items-end w-full relative'>
       <div className='article-list flex flex-col flex-auto gap-5 mt-5'>
         {content}
+        <span className='hidden lg:block'>
+          {data && data?.articlesCount > 5 && <ScrollUpArrow />}
+        </span>
         {data && <PaginationBar articlesCount={data.articlesCount} />}
       </div>
-      {data && data?.articlesCount > 5 && <ScrollUpArrow />}
     </div>
   );
 };

@@ -18,7 +18,7 @@ const NavbarContainer: React.FC<NavbarContainerProps> = ({ pages, logo }) => {
       )}>
       <div
         className={clsx(
-          'flex flex-row  items-center justify-between gap-2 w-4/6 m-auto overflow-hidden'
+          'flex flex-row  items-center justify-between gap-1 lg:w-4/6 mx-10 lg:m-auto'
         )}>
         {logo}
         <ButtonGroup className={clsx(styles.navigation, 'flex flex-row ')}>

@@ -37,16 +37,17 @@ const Home = () => {
     <main
       className={clsx(
         styles.mainArticleContainer,
-        'w-4/6 gap-10 min-h-screen'
+        'lg:w-4/6 gap-10 min-h-screen flex justify-start items-start lg:flex-row m-4 sm:m-10 lg:m-auto',
+        'w-full, flex-col-reverse'
       )}>
-      <div className={clsx(styles.aricleListContainer)}>
+      <div className={clsx('xl:w-5/6 ')}>
         <div className='flex flex-row items-center border-b border-blue-400 '>
           <Button onClick={handleResetTag}>Global Feed</Button>
           {tagState.tag !== '' && <Button disabled>#{tagState.tag}</Button>}
         </div>
-        <div className={clsx(styles.list)}>{list}</div>
+        <div className={clsx('flex justify-start items-start')}>{list}</div>
       </div>
-      <PopularTags className='w-2/6' />
+      <PopularTags className='lg:w-2/6 w-full' />
     </main>
   );
 };

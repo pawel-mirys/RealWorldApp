@@ -12,7 +12,14 @@ const ScrollUpArrow = () => {
   return (
     <Button
       onClick={scrollToTop}
-      sx={{ height: '50px', width: '50px', marginBottom: 14, marginLeft: 2 }}>
+      className=''
+      sx={{
+        height: '50px',
+        width: '50px',
+        bottom: '4%',
+        left: '101%',
+        position: 'absolute',
+      }}>
       <ArrowCircleUpOutlinedIcon sx={{ height: '100%', width: '100%' }} />
     </Button>
   );

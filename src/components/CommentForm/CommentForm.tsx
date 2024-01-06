@@ -55,7 +55,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ slug }) => {
   );
 
   return (
-    <div className='flex flex-row items-start gap-3 mt-5 w-full'>
+    <div className='flex flex-col items-center lg:flex-row lg:items-start gap-3 mt-5 w-full'>
       <Avatar src={currentUserData.image} />
       <Form
         inputs={commentInput}

@@ -62,10 +62,10 @@ const ArticleShow: React.FC = () => {
             handleDeleteArticle={handleDeleteArticle}
             handleEditArticle={handleEditArticle}
           />
-          <div className={clsx('content', 'w-4/6 mx-auto text-lg')}>
+          <div className={clsx('content', 'lg:w-4/6 lg:mx-auto mx-10 text-lg')}>
             <p>{article.body}</p>
           </div>
-          <div className={clsx('tags', 'w-4/6 mx-auto')}>
+          <div className={clsx('tags', 'lg:w-4/6 lg:mx-auto mx-10')}>
             <TagsList
               data={article.tagList}
               isLoading={isFetching}
